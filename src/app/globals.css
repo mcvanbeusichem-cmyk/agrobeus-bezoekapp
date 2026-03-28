@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Voorkom horizontaal scrollen op mobiel */
+  html, body {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Betere tap targets op iOS */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Vermijd zoom op input focus in Safari */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="date"],
+  input[type="time"],
+  select,
+  textarea {
+    font-size: 16px; /* Minimaal 16px voorkomt zoom in Safari */
+  }
+}
+
+@layer utilities {
+  /* Safe area padding utilities voor iPhone */
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .pb-safe-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  .mb-nav {
+    /* Ruimte voor de vaste navigatiebalk onderaan */
+    margin-bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+}

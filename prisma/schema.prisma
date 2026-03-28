@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Customer {
+  id          String   @id @default(cuid())
+  companyName String
+  contactName String
+  email       String
+  phone       String
+  address     String
+  cropType    String
+  hectares    Float?
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  visits Visit[]
+}
+
+model Visit {
+  id           String    @id @default(cuid())
+  customerId   String
+  visitDate    String    // ISO date string: "2025-03-15"
+  visitTime    String    // Time string: "14:30"
+  title        String
+  report       String
+  advice       String?
+  actionPoints String?
+  followUpDate String?   // ISO date string
+  status       String    @default("concept") // concept | verzonden | afgerond
+  emailedAt    DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+}

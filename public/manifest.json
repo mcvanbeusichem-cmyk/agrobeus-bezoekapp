@@ -1,0 +1,43 @@
+{
+  "name": "Agrobeus BezoekApp",
+  "short_name": "Agrobeus",
+  "description": "Klantenbeheer en bezoekregistratie voor Agrobeus Consulting",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f9fafb",
+  "theme_color": "#4a8a3a",
+  "orientation": "portrait-primary",
+  "lang": "nl",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "apple touch icon"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nieuw bezoek",
+      "url": "/visits/new",
+      "description": "Direct een nieuw bezoek registreren"
+    },
+    {
+      "name": "Klanten",
+      "url": "/customers",
+      "description": "Klantenlijst bekijken"
+    }
+  ]
+}
