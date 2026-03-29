@@ -5,7 +5,7 @@ export async function GET(_req: NextRequest, { params }: { params: { id: string 
   try {
     const visit = await prisma.visit.findUnique({
       where: { id: params.id },
-      include: { customer: true },
+      include: { customer: true, photos: true },
     })
 
     if (!visit) {
@@ -22,7 +22,7 @@ export async function GET(_req: NextRequest, { params }: { params: { id: string 
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
   try {
     const body = await req.json()
-    const { visitDate, visitTime, title, report, advice, actionPoints, followUpDate, status } = body
+    const { visitDate, visitTime, title, report, advice, actionPoints, followUpDate, status, latitude, longitude } = body
 
     if (!visitDate || !visitTime || !title || !report) {
       return NextResponse.json({ error: 'Verplichte velden ontbreken' }, { status: 400 })
@@ -39,8 +39,10 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
         actionPoints: actionPoints || null,
         followUpDate: followUpDate || null,
         status: status ?? 'concept',
+        latitude: latitude ?? null,
+        longitude: longitude ?? null,
       },
-      include: { customer: true },
+      include: { customer: true, photos: true },
     })
 
     return NextResponse.json(visit)

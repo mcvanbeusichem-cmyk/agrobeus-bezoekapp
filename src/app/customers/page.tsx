@@ -23,12 +23,12 @@ export default async function CustomersPage({
         search
           ? {
               OR: [
-                { companyName: { contains: search, mode: 'insensitive' } },
-                { contactName: { contains: search, mode: 'insensitive' } },
+                { companyName: { contains: search } },
+                { contactName: { contains: search } },
               ],
             }
           : {},
-        cropType ? { cropType: { contains: cropType, mode: 'insensitive' } } : {},
+        cropType ? { cropType: { contains: cropType } } : {},
       ],
     },
     include: {
@@ -42,21 +42,39 @@ export default async function CustomersPage({
     orderBy: { companyName: 'asc' },
   })
 
+  const serializedCustomers = customers.map(({ visits, ...c }) => ({
+    ...c,
+    createdAt: c.createdAt.toISOString(),
+    updatedAt: c.updatedAt.toISOString(),
+    lastVisitDate: visits[0]?.visitDate?.toString(),
+  }))
+
   return (
     <div className="pb-24">
       <PageHeader
         title="Klanten"
         showLogo={true}
         action={
-          <Link
-            href="/customers/new"
-            className="flex items-center justify-center w-10 h-10 bg-brand-500 text-white rounded-xl"
-            aria-label="Klant toevoegen"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/customers/import"
+              className="flex items-center justify-center w-10 h-10 bg-white border border-gray-300 text-gray-600 rounded-xl"
+              aria-label="Importeren uit Excel"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+              </svg>
+            </Link>
+            <Link
+              href="/customers/new"
+              className="flex items-center justify-center w-10 h-10 bg-brand-500 text-white rounded-xl"
+              aria-label="Klant toevoegen"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+            </Link>
+          </div>
         }
       />
 
@@ -96,11 +114,11 @@ export default async function CustomersPage({
               {customers.length} klant{customers.length !== 1 ? 'en' : ''}
               {search && ` voor "${search}"`}
             </p>
-            {customers.map((customer) => (
+            {serializedCustomers.map((customer) => (
               <CustomerCard
                 key={customer.id}
                 customer={customer}
-                lastVisitDate={customer.visits[0]?.visitDate}
+                lastVisitDate={customer.lastVisitDate}
               />
             ))}
           </>

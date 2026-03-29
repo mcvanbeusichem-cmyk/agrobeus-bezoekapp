@@ -17,13 +17,20 @@ export default async function EditVisitPage({ params }: { params: { id: string }
         title="Bezoek bewerken"
         backHref={`/visits/${visit.id}`}
         backLabel="Bezoek"
+        useBackButton={true}
       />
       <VisitForm
         initialData={{
           ...visit,
+          status: visit.status as 'concept' | 'verzonden' | 'afgerond',
           emailedAt: visit.emailedAt?.toISOString() ?? null,
           createdAt: visit.createdAt.toISOString(),
           updatedAt: visit.updatedAt.toISOString(),
+          customer: visit.customer ? {
+            ...visit.customer,
+            createdAt: visit.customer.createdAt.toISOString(),
+            updatedAt: visit.customer.updatedAt.toISOString(),
+          } : undefined,
         }}
         visitId={visit.id}
         preselectedCustomerId={visit.customerId}

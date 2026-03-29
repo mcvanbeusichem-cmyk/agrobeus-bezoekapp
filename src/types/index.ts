@@ -16,6 +16,14 @@ export interface Customer {
   _count?: { visits: number }
 }
 
+export interface Photo {
+  id: string
+  visitId: string
+  url: string
+  filename: string
+  createdAt: string
+}
+
 export interface Visit {
   id: string
   customerId: string
@@ -28,9 +36,12 @@ export interface Visit {
   followUpDate: string | null
   status: VisitStatus
   emailedAt: string | null
+  latitude?: number | null
+  longitude?: number | null
   createdAt: string
   updatedAt: string
   customer?: Customer
+  photos?: Photo[]
 }
 
 export interface DashboardData {

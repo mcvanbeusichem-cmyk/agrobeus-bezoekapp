@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -35,8 +35,20 @@ model Visit {
   followUpDate String?   // ISO date string
   status       String    @default("concept") // concept | verzonden | afgerond
   emailedAt    DateTime?
+  latitude     Float?
+  longitude    Float?
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 
   customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  photos   Photo[]
+}
+
+model Photo {
+  id        String   @id @default(cuid())
+  visitId   String
+  url       String
+  filename  String
+  createdAt DateTime @default(now())
+  visit     Visit    @relation(fields: [visitId], references: [id], onDelete: Cascade)
 }

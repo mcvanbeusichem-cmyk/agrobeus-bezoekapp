@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { BackButton } from './BackButton'
 
 interface PageHeaderProps {
   title: string
@@ -7,13 +8,17 @@ interface PageHeaderProps {
   backLabel?: string
   action?: React.ReactNode
   showLogo?: boolean
+  useBackButton?: boolean
 }
 
-export function PageHeader({ title, backHref, backLabel, action, showLogo = false }: PageHeaderProps) {
+export function PageHeader({ title, backHref, backLabel, action, showLogo = false, useBackButton = false }: PageHeaderProps) {
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-gray-200 pt-safe">
       <div className="flex items-center gap-3 px-4 h-14">
-        {backHref && (
+        {useBackButton && (
+          <BackButton fallbackHref={backHref ?? '/'} label={backLabel} />
+        )}
+        {backHref && !useBackButton && (
           <Link
             href={backHref}
             className="flex items-center justify-center w-10 h-10 -ml-2 text-brand-600 rounded-xl hover:bg-brand-50 active:bg-brand-100 transition-colors"

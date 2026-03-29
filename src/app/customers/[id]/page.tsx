@@ -26,6 +26,7 @@ export default async function CustomerDetailPage({ params }: { params: { id: str
         title={customer.companyName}
         backHref="/customers"
         backLabel="Klanten"
+        useBackButton={true}
         action={
           <div className="flex items-center gap-1">
             <Link

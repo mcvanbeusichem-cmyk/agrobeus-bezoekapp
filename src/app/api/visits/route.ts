@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { customerId, visitDate, visitTime, title, report, advice, actionPoints, followUpDate, status } = body
+    const { customerId, visitDate, visitTime, title, report, advice, actionPoints, followUpDate, status, latitude, longitude } = body
 
     if (!customerId || !visitDate || !visitTime || !title || !report) {
       return NextResponse.json({ error: 'Verplichte velden ontbreken' }, { status: 400 })
@@ -45,6 +45,8 @@ export async function POST(req: NextRequest) {
         actionPoints: actionPoints || null,
         followUpDate: followUpDate || null,
         status: status ?? 'concept',
+        latitude: latitude ?? null,
+        longitude: longitude ?? null,
       },
       include: { customer: true },
     })

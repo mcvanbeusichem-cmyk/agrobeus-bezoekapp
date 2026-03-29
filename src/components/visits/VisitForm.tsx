@@ -25,7 +25,12 @@ export function VisitForm({
   const isEditing = !!visitId
 
   const [loading, setLoading] = useState(false)
+  const [saving, setSaving] = useState(false)
+  const [savedAt, setSavedAt] = useState<string | null>(null)
+  const [currentVisitId, setCurrentVisitId] = useState<string | undefined>(visitId)
   const [error, setError] = useState<string | null>(null)
+  const [locationLoading, setLocationLoading] = useState(false)
+  const [locationCaptured, setLocationCaptured] = useState(false)
   const [form, setForm] = useState({
     customerId: initialData?.customerId ?? preselectedCustomerId ?? '',
     visitDate: initialData?.visitDate ?? today,
@@ -36,6 +41,8 @@ export function VisitForm({
     actionPoints: initialData?.actionPoints ?? '',
     followUpDate: initialData?.followUpDate ?? '',
     status: (initialData?.status ?? 'concept') as VisitStatus,
+    latitude: initialData?.latitude ?? null as number | null,
+    longitude: initialData?.longitude ?? null as number | null,
   })
 
   function handleChange(
@@ -44,14 +51,65 @@ export function VisitForm({
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
+  function handleGetLocation() {
+    if (!navigator.geolocation) {
+      alert('Geolocatie wordt niet ondersteund door deze browser')
+      return
+    }
+    setLocationLoading(true)
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setForm((prev) => ({
+          ...prev,
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        }))
+        setLocationLoading(false)
+        setLocationCaptured(true)
+      },
+      (err) => {
+        console.error(err)
+        setLocationLoading(false)
+        alert('Kon locatie niet bepalen. Controleer de locatierechten in de browserinstellingen.')
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    )
+  }
+
+  async function handleSaveDraft() {
+    setSaving(true)
+    setError(null)
+    try {
+      const isUpdate = !!currentVisitId
+      const url = isUpdate ? `/api/visits/${currentVisitId}` : '/api/visits'
+      const method = isUpdate ? 'PUT' : 'POST'
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, status: 'concept' }),
+      })
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error ?? 'Er ging iets mis')
+      }
+      const visit = await res.json()
+      setCurrentVisitId(visit.id)
+      setSavedAt(new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }))
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Er ging iets mis')
+    } finally {
+      setSaving(false)
+    }
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true)
     setError(null)
 
     try {
-      const url = isEditing ? `/api/visits/${visitId}` : '/api/visits'
-      const method = isEditing ? 'PUT' : 'POST'
+      const url = currentVisitId ? `/api/visits/${currentVisitId}` : '/api/visits'
+      const method = currentVisitId ? 'PUT' : 'POST'
 
       const res = await fetch(url, {
         method,
@@ -216,7 +274,86 @@ export function VisitForm({
         </select>
       </div>
 
-      <div className="pt-2 pb-safe-bottom flex gap-3">
+      {/* GPS Locatie */}
+      <div>
+        <label className={labelClass}>Locatie</label>
+        {locationCaptured && form.latitude != null && form.longitude != null ? (
+          <div className="flex items-center gap-3">
+            <div className="flex-1 rounded-xl bg-green-50 border border-green-200 px-4 py-3 flex items-center gap-2">
+              <span className="text-green-600">📍</span>
+              <div>
+                <p className="text-sm font-medium text-green-800">Locatie vastgelegd</p>
+                <p className="text-xs text-green-600">
+                  {form.latitude.toFixed(5)}, {form.longitude.toFixed(5)}
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setForm((prev) => ({ ...prev, latitude: null, longitude: null }))
+                setLocationCaptured(false)
+              }}
+              className="rounded-xl border border-gray-300 bg-white px-3 py-3 text-sm text-gray-500 hover:bg-gray-50 active:bg-gray-100 transition-colors"
+            >
+              Wissen
+            </button>
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={handleGetLocation}
+            disabled={locationLoading}
+            className="w-full flex items-center justify-center gap-2 rounded-xl border border-gray-300 bg-white px-4 py-3 text-base text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors disabled:opacity-60"
+          >
+            {locationLoading ? (
+              <>
+                <div className="h-4 w-4 animate-spin rounded-full border-2 border-brand-500 border-t-transparent" />
+                <span>Locatie bepalen...</span>
+              </>
+            ) : (
+              <>
+                <span>📍</span>
+                <span>Locatie vastleggen</span>
+              </>
+            )}
+          </button>
+        )}
+        {initialData?.latitude != null && !locationCaptured && (
+          <p className="mt-1.5 text-xs text-gray-400">
+            Huidige locatie: {initialData.latitude?.toFixed(5)}, {initialData.longitude?.toFixed(5)}
+          </p>
+        )}
+      </div>
+
+      {/* Concept opslaan */}
+      <div className="flex items-center justify-between">
+        <button
+          type="button"
+          onClick={handleSaveDraft}
+          disabled={saving || !form.title || !form.customerId}
+          className="inline-flex items-center gap-2 text-sm text-brand-600 font-medium disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          {saving ? (
+            <>
+              <div className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-brand-500 border-t-transparent" />
+              Opslaan...
+            </>
+          ) : (
+            <>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+              </svg>
+              Concept opslaan
+            </>
+          )}
+        </button>
+        {savedAt && !saving && (
+          <span className="text-xs text-gray-400">Opgeslagen om {savedAt}</span>
+        )}
+      </div>
+
+      <div className="pt-1 pb-safe-bottom flex gap-3">
         <Button
           type="button"
           variant="secondary"
