@@ -240,6 +240,14 @@ export default async function PrintPage({ params }: PrintPageProps) {
             background: #ecfdf5 !important;
             -webkit-print-color-adjust: exact;
           }
+          .footer {
+            break-before: avoid;
+            page-break-before: avoid;
+          }
+          .section, .meta-grid, .followup-box {
+            break-inside: avoid;
+            page-break-inside: avoid;
+          }
         }
       `}</style>
 
