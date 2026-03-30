@@ -26,6 +26,7 @@ export async function POST(req: NextRequest) {
 
     const blob = await put(filename, file, {
       access: 'public',
+      token: process.env.BLOB_PHOTOS_READ_WRITE_TOKEN,
     })
 
     const photo = await prisma.photo.create({
