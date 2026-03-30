@@ -59,16 +59,14 @@ export default async function PrintPage({ params }: PrintPageProps) {
           justify-content: space-between;
           align-items: flex-start;
         }
-        .brand {
-          font-size: 22px;
-          font-weight: 700;
-          color: #2d6a4f;
-          letter-spacing: -0.3px;
+        .logo {
+          height: 56px;
+          width: auto;
         }
         .brand-sub {
           font-size: 12px;
           color: #6b7280;
-          margin-top: 2px;
+          margin-top: 4px;
         }
         .print-date {
           font-size: 12px;
@@ -186,10 +184,9 @@ export default async function PrintPage({ params }: PrintPageProps) {
           justify-content: space-between;
           align-items: center;
         }
-        .footer-brand {
-          font-size: 13px;
-          font-weight: 600;
-          color: #2d6a4f;
+        .footer-logo {
+          height: 28px;
+          width: auto;
         }
         .footer-page {
           font-size: 12px;
@@ -258,7 +255,8 @@ export default async function PrintPage({ params }: PrintPageProps) {
         <div className="header">
           <div className="header-top">
             <div>
-              <div className="brand">Agrobeus Consulting</div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo.png" alt="Agrobeus Consulting" className="logo" />
               <div className="brand-sub">Bezoekverslag</div>
             </div>
             <div className="print-date">
@@ -361,7 +359,8 @@ export default async function PrintPage({ params }: PrintPageProps) {
 
         {/* Footer */}
         <div className="footer">
-          <div className="footer-brand">Agrobeus Consulting</div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.png" alt="Agrobeus Consulting" className="footer-logo" />
           <div className="footer-page">
             {visit.customer.companyName} &bull; {visit.visitDate}
           </div>
