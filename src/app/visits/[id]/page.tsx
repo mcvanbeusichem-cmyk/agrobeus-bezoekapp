@@ -96,30 +96,32 @@ export default function VisitDetailPage() {
   }
 
   async function handlePhotoUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0]
-    if (!file || !visit) return
+    const files = Array.from(e.target.files ?? [])
+    if (!files.length || !visit) return
 
     setPhotoUploading(true)
     try {
-      const formData = new FormData()
-      formData.append('file', file)
-      formData.append('visitId', visit.id)
+      for (const file of files) {
+        const formData = new FormData()
+        formData.append('file', file)
+        formData.append('visitId', visit.id)
 
-      const res = await fetch('/api/photos', {
-        method: 'POST',
-        body: formData,
-      })
+        const res = await fetch('/api/photos', {
+          method: 'POST',
+          body: formData,
+        })
 
-      if (!res.ok) {
-        const data = await res.json()
-        alert(data.error ?? 'Fout bij uploaden foto')
-        return
+        if (!res.ok) {
+          const data = await res.json()
+          alert(data.error ?? 'Fout bij uploaden foto')
+          continue
+        }
+
+        const photo: Photo = await res.json()
+        setVisit((prev) =>
+          prev ? { ...prev, photos: [...(prev.photos ?? []), photo] } : prev
+        )
       }
-
-      const photo: Photo = await res.json()
-      setVisit((prev) =>
-        prev ? { ...prev, photos: [...(prev.photos ?? []), photo] } : prev
-      )
     } catch {
       alert('Er ging iets mis bij het uploaden van de foto')
     } finally {
@@ -309,6 +311,7 @@ export default function VisitDetailPage() {
               ref={fileInputRef}
               type="file"
               accept="image/*"
+              multiple
               className="sr-only"
               onChange={handlePhotoUpload}
               disabled={photoUploading}
