@@ -48,7 +48,7 @@ export function MobileNav() {
   const pathname = usePathname()
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 pb-safe">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 pb-safe print:hidden">
       <div className="flex items-end justify-around px-2 pt-2 pb-2">
         {navItems.map((item) => {
           const isActive =
