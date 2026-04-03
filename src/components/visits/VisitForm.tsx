@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Visit, Customer, VisitStatus } from '@/types'
@@ -29,6 +29,8 @@ export function VisitForm({
   const [savedAt, setSavedAt] = useState<string | null>(null)
   const [currentVisitId, setCurrentVisitId] = useState<string | undefined>(visitId)
   const [error, setError] = useState<string | null>(null)
+  const autoSaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const isSaving = useRef(false)
   const [locationLoading, setLocationLoading] = useState(false)
   const [locationCaptured, setLocationCaptured] = useState(false)
   const [form, setForm] = useState({
@@ -44,6 +46,39 @@ export function VisitForm({
     latitude: initialData?.latitude ?? null as number | null,
     longitude: initialData?.longitude ?? null as number | null,
   })
+
+  // Auto-save: 3 seconden na laatste wijziging
+  useEffect(() => {
+    if (!form.customerId || !form.title) return
+    if (autoSaveTimer.current) clearTimeout(autoSaveTimer.current)
+    autoSaveTimer.current = setTimeout(async () => {
+      if (isSaving.current) return
+      isSaving.current = true
+      setSaving(true)
+      try {
+        const isUpdate = !!currentVisitId
+        const url = isUpdate ? `/api/visits/${currentVisitId}` : '/api/visits'
+        const method = isUpdate ? 'PUT' : 'POST'
+        const res = await fetch(url, {
+          method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...form, status: 'concept' }),
+        })
+        if (res.ok) {
+          const visit = await res.json()
+          setCurrentVisitId(visit.id)
+          setSavedAt(new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }))
+        }
+      } finally {
+        setSaving(false)
+        isSaving.current = false
+      }
+    }, 3000)
+    return () => {
+      if (autoSaveTimer.current) clearTimeout(autoSaveTimer.current)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form])
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -348,8 +383,11 @@ export function VisitForm({
             </>
           )}
         </button>
+        {saving && (
+          <span className="text-xs text-gray-400">Opslaan...</span>
+        )}
         {savedAt && !saving && (
-          <span className="text-xs text-gray-400">Opgeslagen om {savedAt}</span>
+          <span className="text-xs text-gray-400">Automatisch opgeslagen om {savedAt}</span>
         )}
       </div>
 
