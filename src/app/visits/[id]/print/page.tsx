@@ -68,10 +68,30 @@ export default async function PrintPage({ params }: PrintPageProps) {
           color: #6b7280;
           margin-top: 4px;
         }
-        .print-date {
-          font-size: 12px;
-          color: #6b7280;
+        .company-info {
           text-align: right;
+          font-size: 11px;
+          color: #6b7280;
+          line-height: 1.7;
+        }
+        .company-info strong {
+          display: block;
+          font-size: 13px;
+          color: #2d6a4f;
+          font-weight: 700;
+          margin-bottom: 1px;
+        }
+        .company-info .name {
+          display: block;
+          font-size: 12px;
+          color: #374151;
+          font-weight: 500;
+        }
+        .company-info .role {
+          display: block;
+          font-size: 11px;
+          color: #6b7280;
+          margin-bottom: 4px;
         }
         .report-title {
           font-size: 20px;
@@ -259,8 +279,13 @@ export default async function PrintPage({ params }: PrintPageProps) {
               <img src="/logo.png" alt="Agrobeus Consulting" className="logo" />
               <div className="brand-sub">Bezoekverslag</div>
             </div>
-            <div className="print-date">
-              Aangemaakt op {now}
+            <div className="company-info">
+              <strong>Agrobeus Consulting</strong>
+              <span className="name">Marco van Beusichem</span>
+              <span className="role">Internationaal Fruitconsultant · Advies in Fruitteelt</span>
+              Hoofdstraat 49, 4041 AB Kesteren<br />
+              +31 6 54950432 · info@agrobeus.com<br />
+              www.agrobeus.com
             </div>
           </div>
           <div className="report-title">{visit.title}</div>
