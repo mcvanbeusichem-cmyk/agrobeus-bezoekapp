@@ -42,31 +42,51 @@ export default async function PrintPage({ params }: PrintPageProps) {
           background: #fff;
         }
 
-        /* ── Topbalk ─────────────────────────────── */
-        .topbar {
-          background: #1e5c3a;
-          height: 6px;
-          width: 100%;
+        /* ── Groene rand rondom de pagina ── */
+        .border-top    { position: fixed; top: 0; left: 0; right: 0; height: 14px; background: linear-gradient(to right, #1a4731, #2d6a4f, #52b788, #2d6a4f, #1a4731); z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+        .border-bottom { position: fixed; bottom: 0; left: 0; right: 0; height: 14px; background: linear-gradient(to right, #1a4731, #2d6a4f, #52b788, #2d6a4f, #1a4731); z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+        .border-left   { position: fixed; top: 0; left: 0; bottom: 0; width: 14px; background: linear-gradient(to bottom, #1a4731, #2d6a4f, #52b788, #2d6a4f, #1a4731); z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+        .border-right  { position: fixed; top: 0; right: 0; bottom: 0; width: 14px; background: linear-gradient(to bottom, #1a4731, #2d6a4f, #52b788, #2d6a4f, #1a4731); z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+
+        /* ── Watermark peer (groot, vaag, gecentreerd) ── */
+        .watermark {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 680px;
+          height: 680px;
+          background-image: url('/logo.png');
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+          opacity: 0.055;
+          pointer-events: none;
+          z-index: 0;
+          print-color-adjust: exact;
+          -webkit-print-color-adjust: exact;
         }
 
-        /* ── Pagina wrapper ───────────────────────── */
+        /* ── Pagina inhoud ── */
         .page {
+          position: relative;
+          z-index: 1;
           max-width: 800px;
           margin: 0 auto;
-          padding: 32px 48px 40px;
+          padding: 42px 52px 48px;
         }
 
-        /* ── Header ──────────────────────────────── */
+        /* ── Header ── */
         .header {
           display: flex;
           justify-content: space-between;
           align-items: flex-start;
-          padding-bottom: 24px;
-          border-bottom: 1px solid #e5e7eb;
+          padding-bottom: 22px;
+          border-bottom: 1.5px solid #d1fae5;
           margin-bottom: 24px;
         }
         .header-left .logo {
-          height: 52px;
+          height: 80px;
           width: auto;
           display: block;
         }
@@ -74,7 +94,7 @@ export default async function PrintPage({ params }: PrintPageProps) {
           margin-top: 8px;
           font-size: 10px;
           font-weight: 700;
-          letter-spacing: 1.5px;
+          letter-spacing: 1.8px;
           text-transform: uppercase;
           color: #2d6a4f;
         }
@@ -82,31 +102,31 @@ export default async function PrintPage({ params }: PrintPageProps) {
           text-align: right;
           font-size: 11px;
           color: #6b7280;
-          line-height: 1.8;
+          line-height: 1.85;
         }
         .header-right .person {
-          font-size: 12px;
-          font-weight: 600;
-          color: #1f2937;
+          font-size: 13px;
+          font-weight: 700;
+          color: #1a3d2b;
           display: block;
         }
         .header-right .role {
           font-size: 11px;
           color: #4b5563;
           display: block;
-          margin-bottom: 6px;
+          margin-bottom: 5px;
         }
 
-        /* ── Titelbalk ───────────────────────────── */
+        /* ── Titelbalk ── */
         .title-block {
           background: #f0fdf4;
-          border-left: 4px solid #2d6a4f;
+          border-left: 5px solid #2d6a4f;
           padding: 14px 18px;
-          margin-bottom: 24px;
+          margin-bottom: 22px;
           border-radius: 0 8px 8px 0;
         }
         .title-block .report-title {
-          font-size: 18px;
+          font-size: 19px;
           font-weight: 700;
           color: #1a3d2b;
           line-height: 1.3;
@@ -117,18 +137,18 @@ export default async function PrintPage({ params }: PrintPageProps) {
           margin-top: 3px;
         }
 
-        /* ── Klantkaart ──────────────────────────── */
+        /* ── Klantkaart ── */
         .client-card {
           display: grid;
           grid-template-columns: 1fr 1fr 1fr;
-          gap: 0;
-          border: 1px solid #d1fae5;
+          border: 1px solid #bbf7d0;
           border-radius: 8px;
           overflow: hidden;
           margin-bottom: 24px;
+          background: white;
         }
         .client-field {
-          padding: 12px 16px;
+          padding: 11px 15px;
           border-right: 1px solid #d1fae5;
         }
         .client-field:last-child { border-right: none; }
@@ -148,10 +168,8 @@ export default async function PrintPage({ params }: PrintPageProps) {
           font-weight: 500;
         }
 
-        /* ── Secties ─────────────────────────────── */
-        .section {
-          margin-bottom: 22px;
-        }
+        /* ── Secties ── */
+        .section { margin-bottom: 22px; }
         .section-header {
           display: flex;
           align-items: center;
@@ -159,8 +177,7 @@ export default async function PrintPage({ params }: PrintPageProps) {
           margin-bottom: 10px;
         }
         .section-dot {
-          width: 8px;
-          height: 8px;
+          width: 8px; height: 8px;
           border-radius: 50%;
           background: #2d6a4f;
           flex-shrink: 0;
@@ -185,11 +202,8 @@ export default async function PrintPage({ params }: PrintPageProps) {
           padding-left: 16px;
         }
 
-        /* ── Actiepunten ─────────────────────────── */
-        .action-list {
-          list-style: none;
-          padding-left: 16px;
-        }
+        /* ── Actiepunten ── */
+        .action-list { list-style: none; padding-left: 16px; }
         .action-list li {
           display: flex;
           align-items: flex-start;
@@ -199,15 +213,14 @@ export default async function PrintPage({ params }: PrintPageProps) {
           color: #374151;
         }
         .action-check {
-          width: 16px;
-          height: 16px;
+          width: 15px; height: 15px;
           border: 1.5px solid #2d6a4f;
           border-radius: 4px;
           flex-shrink: 0;
           margin-top: 2px;
         }
 
-        /* ── Vervolgafspraak ─────────────────────── */
+        /* ── Vervolgafspraak ── */
         .followup-box {
           display: flex;
           align-items: center;
@@ -219,15 +232,13 @@ export default async function PrintPage({ params }: PrintPageProps) {
           margin-bottom: 22px;
         }
         .followup-icon {
-          width: 36px;
-          height: 36px;
+          width: 36px; height: 36px;
           background: #2d6a4f;
           border-radius: 8px;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          color: white;
           font-size: 16px;
         }
         .followup-label {
@@ -244,7 +255,7 @@ export default async function PrintPage({ params }: PrintPageProps) {
           color: #1a3d2b;
         }
 
-        /* ── Foto's ──────────────────────────────── */
+        /* ── Foto's ── */
         .photos-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -259,76 +270,56 @@ export default async function PrintPage({ params }: PrintPageProps) {
           border: 1px solid #e5e7eb;
         }
 
-        /* ── Footer ──────────────────────────────── */
+        /* ── Footer ── */
         .footer {
           margin-top: 36px;
           padding-top: 16px;
-          border-top: 1px solid #e5e7eb;
+          border-top: 1px solid #d1fae5;
           display: flex;
           align-items: center;
           justify-content: space-between;
         }
-        .footer-logo {
-          height: 24px;
-          width: auto;
-          opacity: 0.7;
-        }
-        .footer-text {
-          font-size: 11px;
-          color: #9ca3af;
-          text-align: right;
-        }
+        .footer-logo { height: 26px; width: auto; opacity: 0.6; }
+        .footer-text { font-size: 11px; color: #9ca3af; text-align: right; }
 
-        /* ── Bottombar ───────────────────────────── */
-        .bottombar {
-          background: #1e5c3a;
-          height: 4px;
-          width: 100%;
-          margin-top: 40px;
-        }
-
-        /* ── Knopjes (niet printen) ───────────────── */
+        /* ── Knoppen (niet printen) ── */
         .no-print {
           position: fixed;
-          top: 16px;
-          right: 16px;
-          display: flex;
-          gap: 8px;
+          top: 20px; right: 24px;
+          display: flex; gap: 8px;
           z-index: 100;
         }
         .btn-close {
-          background: white;
-          border: 1px solid #d1d5db;
-          border-radius: 8px;
-          padding: 8px 16px;
-          font-size: 14px;
-          font-weight: 500;
-          color: #374151;
-          cursor: pointer;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          background: white; border: 1px solid #d1d5db;
+          border-radius: 8px; padding: 8px 16px;
+          font-size: 14px; font-weight: 500; color: #374151;
+          cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         .btn-print {
-          background: #2d6a4f;
-          border: none;
-          border-radius: 8px;
-          padding: 8px 16px;
-          font-size: 14px;
-          font-weight: 500;
-          color: white;
-          cursor: pointer;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          background: #2d6a4f; border: none;
+          border-radius: 8px; padding: 8px 16px;
+          font-size: 14px; font-weight: 500; color: white;
+          cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
-        /* ── Print media ─────────────────────────── */
+        /* ── Print media ── */
         @media print {
           .no-print { display: none !important; }
-          body {
+          body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+          .page { padding: 28px 40px; }
+          .border-top, .border-bottom, .border-left, .border-right {
+            position: fixed;
             print-color-adjust: exact;
             -webkit-print-color-adjust: exact;
           }
-          .page { padding: 20px 32px 28px; }
-          .topbar, .bottombar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-          .title-block, .followup-box, .client-card { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+          .watermark {
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+          }
+          .title-block, .followup-box, .client-card {
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+          }
           .footer { break-before: avoid; page-break-before: avoid; }
           .section, .client-card, .followup-box { break-inside: avoid; page-break-inside: avoid; }
         }
@@ -336,7 +327,14 @@ export default async function PrintPage({ params }: PrintPageProps) {
 
       <PrintActions />
 
-      <div className="topbar" />
+      {/* Groene rand rondom de pagina */}
+      <div className="border-top" />
+      <div className="border-bottom" />
+      <div className="border-left" />
+      <div className="border-right" />
+
+      {/* Groot vaag logo als watermark */}
+      <div className="watermark" />
 
       <div className="page">
 
@@ -482,8 +480,6 @@ export default async function PrintPage({ params }: PrintPageProps) {
         </div>
 
       </div>
-
-      <div className="bottombar" />
     </>
   )
 }
