@@ -32,162 +32,224 @@ export default async function PrintPage({ params }: PrintPageProps) {
   return (
     <>
       <style>{`
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-          font-size: 14px;
+          font-size: 13px;
           line-height: 1.6;
-          color: #1a1a1a;
-          background: white;
+          color: #1f2937;
+          background: #fff;
         }
-        .container {
+
+        /* ── Topbalk ─────────────────────────────── */
+        .topbar {
+          background: #1e5c3a;
+          height: 6px;
+          width: 100%;
+        }
+
+        /* ── Pagina wrapper ───────────────────────── */
+        .page {
           max-width: 800px;
           margin: 0 auto;
-          padding: 40px 48px;
+          padding: 32px 48px 40px;
         }
+
+        /* ── Header ──────────────────────────────── */
         .header {
-          border-bottom: 3px solid #2d6a4f;
-          padding-bottom: 20px;
-          margin-bottom: 28px;
-        }
-        .header-top {
           display: flex;
           justify-content: space-between;
           align-items: flex-start;
+          padding-bottom: 24px;
+          border-bottom: 1px solid #e5e7eb;
+          margin-bottom: 24px;
         }
-        .logo {
-          height: 56px;
+        .header-left .logo {
+          height: 52px;
           width: auto;
+          display: block;
         }
-        .brand-sub {
-          font-size: 12px;
-          color: #6b7280;
-          margin-top: 4px;
+        .header-left .doc-type {
+          margin-top: 8px;
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          color: #2d6a4f;
         }
-        .company-info {
+        .header-right {
           text-align: right;
           font-size: 11px;
           color: #6b7280;
-          line-height: 1.7;
+          line-height: 1.8;
         }
-        .company-info strong {
-          display: block;
-          font-size: 13px;
-          color: #2d6a4f;
-          font-weight: 700;
-          margin-bottom: 1px;
-        }
-        .company-info .name {
-          display: block;
+        .header-right .person {
           font-size: 12px;
-          color: #374151;
-          font-weight: 500;
-        }
-        .company-info .role {
-          display: block;
-          font-size: 11px;
-          color: #6b7280;
-          margin-bottom: 4px;
-        }
-        .report-title {
-          font-size: 20px;
-          font-weight: 700;
-          color: #111827;
-          margin-top: 16px;
-        }
-        .meta-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 16px;
-          background: #f9fafb;
-          border: 1px solid #e5e7eb;
-          border-radius: 8px;
-          padding: 16px;
-          margin-bottom: 24px;
-        }
-        .meta-item label {
-          display: block;
-          font-size: 10px;
           font-weight: 600;
+          color: #1f2937;
+          display: block;
+        }
+        .header-right .role {
+          font-size: 11px;
+          color: #4b5563;
+          display: block;
+          margin-bottom: 6px;
+        }
+
+        /* ── Titelbalk ───────────────────────────── */
+        .title-block {
+          background: #f0fdf4;
+          border-left: 4px solid #2d6a4f;
+          padding: 14px 18px;
+          margin-bottom: 24px;
+          border-radius: 0 8px 8px 0;
+        }
+        .title-block .report-title {
+          font-size: 18px;
+          font-weight: 700;
+          color: #1a3d2b;
+          line-height: 1.3;
+        }
+        .title-block .report-date {
+          font-size: 11px;
           color: #6b7280;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-          margin-bottom: 3px;
+          margin-top: 3px;
         }
-        .meta-item p {
-          font-size: 14px;
-          color: #111827;
-          font-weight: 500;
-        }
-        .section {
+
+        /* ── Klantkaart ──────────────────────────── */
+        .client-card {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 0;
+          border: 1px solid #d1fae5;
+          border-radius: 8px;
+          overflow: hidden;
           margin-bottom: 24px;
         }
-        .section-title {
-          font-size: 11px;
+        .client-field {
+          padding: 12px 16px;
+          border-right: 1px solid #d1fae5;
+        }
+        .client-field:last-child { border-right: none; }
+        .client-field:nth-child(n+4) { border-top: 1px solid #d1fae5; }
+        .client-field label {
+          display: block;
+          font-size: 9px;
           font-weight: 700;
-          color: #2d6a4f;
           text-transform: uppercase;
           letter-spacing: 0.8px;
-          border-bottom: 1px solid #d1fae5;
-          padding-bottom: 6px;
-          margin-bottom: 12px;
+          color: #2d6a4f;
+          margin-bottom: 3px;
+        }
+        .client-field p {
+          font-size: 13px;
+          color: #1f2937;
+          font-weight: 500;
+        }
+
+        /* ── Secties ─────────────────────────────── */
+        .section {
+          margin-bottom: 22px;
+        }
+        .section-header {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 10px;
+        }
+        .section-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #2d6a4f;
+          flex-shrink: 0;
+        }
+        .section-title {
+          font-size: 10px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          color: #2d6a4f;
+        }
+        .section-line {
+          flex: 1;
+          height: 1px;
+          background: #d1fae5;
         }
         .section-content {
-          font-size: 14px;
+          font-size: 13px;
           color: #374151;
-          line-height: 1.7;
+          line-height: 1.75;
           white-space: pre-wrap;
+          padding-left: 16px;
         }
+
+        /* ── Actiepunten ─────────────────────────── */
         .action-list {
           list-style: none;
-          padding: 0;
+          padding-left: 16px;
         }
         .action-list li {
           display: flex;
           align-items: flex-start;
-          gap: 8px;
+          gap: 10px;
           margin-bottom: 6px;
-          font-size: 14px;
+          font-size: 13px;
           color: #374151;
         }
-        .action-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: #2d6a4f;
+        .action-check {
+          width: 16px;
+          height: 16px;
+          border: 1.5px solid #2d6a4f;
+          border-radius: 4px;
           flex-shrink: 0;
-          margin-top: 7px;
+          margin-top: 2px;
         }
+
+        /* ── Vervolgafspraak ─────────────────────── */
         .followup-box {
-          background: #ecfdf5;
-          border: 1px solid #a7f3d0;
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          background: #f0fdf4;
+          border: 1px solid #bbf7d0;
           border-radius: 8px;
-          padding: 14px 16px;
-          margin-bottom: 24px;
+          padding: 14px 18px;
+          margin-bottom: 22px;
         }
-        .followup-box label {
-          display: block;
+        .followup-icon {
+          width: 36px;
+          height: 36px;
+          background: #2d6a4f;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          color: white;
+          font-size: 16px;
+        }
+        .followup-label {
           font-size: 10px;
           font-weight: 700;
-          color: #065f46;
           text-transform: uppercase;
-          letter-spacing: 0.5px;
-          margin-bottom: 4px;
+          letter-spacing: 0.8px;
+          color: #2d6a4f;
+          margin-bottom: 2px;
         }
-        .followup-box p {
-          font-size: 15px;
+        .followup-date {
+          font-size: 14px;
           font-weight: 600;
-          color: #064e3b;
+          color: #1a3d2b;
         }
+
+        /* ── Foto's ──────────────────────────────── */
         .photos-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 8px;
-          margin-top: 8px;
+          padding-left: 16px;
         }
         .photo-item img {
           width: 100%;
@@ -196,22 +258,36 @@ export default async function PrintPage({ params }: PrintPageProps) {
           border-radius: 6px;
           border: 1px solid #e5e7eb;
         }
+
+        /* ── Footer ──────────────────────────────── */
         .footer {
-          border-top: 1px solid #e5e7eb;
+          margin-top: 36px;
           padding-top: 16px;
-          margin-top: 32px;
+          border-top: 1px solid #e5e7eb;
           display: flex;
-          justify-content: space-between;
           align-items: center;
+          justify-content: space-between;
         }
         .footer-logo {
-          height: 28px;
+          height: 24px;
           width: auto;
+          opacity: 0.7;
         }
-        .footer-page {
-          font-size: 12px;
+        .footer-text {
+          font-size: 11px;
           color: #9ca3af;
+          text-align: right;
         }
+
+        /* ── Bottombar ───────────────────────────── */
+        .bottombar {
+          background: #1e5c3a;
+          height: 4px;
+          width: 100%;
+          margin-top: 40px;
+        }
+
+        /* ── Knopjes (niet printen) ───────────────── */
         .no-print {
           position: fixed;
           top: 16px;
@@ -242,81 +318,76 @@ export default async function PrintPage({ params }: PrintPageProps) {
           cursor: pointer;
           box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
+
+        /* ── Print media ─────────────────────────── */
         @media print {
-          .no-print {
-            display: none !important;
-          }
+          .no-print { display: none !important; }
           body {
             print-color-adjust: exact;
             -webkit-print-color-adjust: exact;
           }
-          .container {
-            padding: 20px 24px;
-          }
-          .followup-box {
-            background: #ecfdf5 !important;
-            -webkit-print-color-adjust: exact;
-          }
-          .footer {
-            break-before: avoid;
-            page-break-before: avoid;
-          }
-          .section, .meta-grid, .followup-box {
-            break-inside: avoid;
-            page-break-inside: avoid;
-          }
+          .page { padding: 20px 32px 28px; }
+          .topbar, .bottombar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+          .title-block, .followup-box, .client-card { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+          .footer { break-before: avoid; page-break-before: avoid; }
+          .section, .client-card, .followup-box { break-inside: avoid; page-break-inside: avoid; }
         }
       `}</style>
 
       <PrintActions />
 
-      <div className="container">
+      <div className="topbar" />
+
+      <div className="page">
+
         {/* Header */}
         <div className="header">
-          <div className="header-top">
-            <div>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo.png" alt="Agrobeus Consulting" className="logo" />
-              <div className="brand-sub">Bezoekverslag</div>
-            </div>
-            <div className="company-info">
-              <strong>Agrobeus Consulting</strong>
-              <span className="name">Marco van Beusichem</span>
-              <span className="role">Internationaal Fruitconsultant · Advies in Fruitteelt</span>
-              Hoofdstraat 49, 4041 AB Kesteren<br />
-              +31 6 54950432 · info@agrobeus.com<br />
-              www.agrobeus.com
-            </div>
+          <div className="header-left">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="Agrobeus Consulting" className="logo" />
+            <div className="doc-type">Bezoekverslag</div>
           </div>
-          <div className="report-title">{visit.title}</div>
+          <div className="header-right">
+            <span className="person">Marco van Beusichem</span>
+            <span className="role">Internationaal Fruitconsultant · Advies in Fruitteelt</span>
+            Hoofdstraat 49, 4041 AB Kesteren<br />
+            +31 6 54950432 · info@agrobeus.com<br />
+            www.agrobeus.com
+          </div>
         </div>
 
-        {/* Klant & datum info */}
-        <div className="meta-grid">
-          <div className="meta-item">
+        {/* Titel */}
+        <div className="title-block">
+          <div className="report-title">{visit.title}</div>
+          <div className="report-date">Aangemaakt op {now}</div>
+        </div>
+
+        {/* Klantgegevens */}
+        <div className="client-card">
+          <div className="client-field">
             <label>Bedrijf</label>
             <p>{visit.customer.companyName}</p>
           </div>
-          <div className="meta-item">
+          <div className="client-field">
             <label>Contactpersoon</label>
             <p>{visit.customer.contactName}</p>
           </div>
-          <div className="meta-item">
+          <div className="client-field">
             <label>Datum</label>
             <p style={{ textTransform: 'capitalize' }}>{formattedDate}</p>
           </div>
-          <div className="meta-item">
+          <div className="client-field">
             <label>Tijd</label>
             <p>{visit.visitTime} uur</p>
           </div>
           {visit.customer.address && (
-            <div className="meta-item">
+            <div className="client-field">
               <label>Adres</label>
               <p>{visit.customer.address}</p>
             </div>
           )}
-          {visit.customer.cropType && (
-            <div className="meta-item">
+          {visit.customer.cropType && visit.customer.cropType !== '-' && (
+            <div className="client-field">
               <label>Gewas</label>
               <p>{visit.customer.cropType}</p>
             </div>
@@ -325,14 +396,22 @@ export default async function PrintPage({ params }: PrintPageProps) {
 
         {/* Verslag */}
         <div className="section">
-          <div className="section-title">Verslag</div>
+          <div className="section-header">
+            <div className="section-dot" />
+            <div className="section-title">Verslag</div>
+            <div className="section-line" />
+          </div>
           <div className="section-content">{visit.report}</div>
         </div>
 
         {/* Advies */}
         {visit.advice && (
           <div className="section">
-            <div className="section-title">Advies</div>
+            <div className="section-header">
+              <div className="section-dot" />
+              <div className="section-title">Advies</div>
+              <div className="section-line" />
+            </div>
             <div className="section-content">{visit.advice}</div>
           </div>
         )}
@@ -340,11 +419,15 @@ export default async function PrintPage({ params }: PrintPageProps) {
         {/* Actiepunten */}
         {visit.actionPoints && (
           <div className="section">
-            <div className="section-title">Actiepunten</div>
+            <div className="section-header">
+              <div className="section-dot" />
+              <div className="section-title">Actiepunten</div>
+              <div className="section-line" />
+            </div>
             <ul className="action-list">
               {visit.actionPoints.split('\n').filter(Boolean).map((point, i) => (
                 <li key={i}>
-                  <div className="action-dot" />
+                  <div className="action-check" />
                   <span>{point.replace(/^[-•]\s*/, '')}</span>
                 </li>
               ))}
@@ -355,22 +438,29 @@ export default async function PrintPage({ params }: PrintPageProps) {
         {/* Vervolgafspraak */}
         {visit.followUpDate && (
           <div className="followup-box">
-            <label>Vervolgafspraak</label>
-            <p>
-              {new Date(visit.followUpDate).toLocaleDateString('nl-NL', {
-                weekday: 'long',
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-              })}
-            </p>
+            <div className="followup-icon">📅</div>
+            <div>
+              <div className="followup-label">Vervolgafspraak</div>
+              <div className="followup-date">
+                {new Date(visit.followUpDate).toLocaleDateString('nl-NL', {
+                  weekday: 'long',
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric',
+                })}
+              </div>
+            </div>
           </div>
         )}
 
         {/* Foto's */}
         {visit.photos && visit.photos.length > 0 && (
           <div className="section">
-            <div className="section-title">Foto&apos;s</div>
+            <div className="section-header">
+              <div className="section-dot" />
+              <div className="section-title">Foto&apos;s</div>
+              <div className="section-line" />
+            </div>
             <div className="photos-grid">
               {visit.photos.map((photo) => (
                 <div key={photo.id} className="photo-item">
@@ -386,11 +476,14 @@ export default async function PrintPage({ params }: PrintPageProps) {
         <div className="footer">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo.png" alt="Agrobeus Consulting" className="footer-logo" />
-          <div className="footer-page">
+          <div className="footer-text">
             {visit.customer.companyName} &bull; {visit.visitDate}
           </div>
         </div>
+
       </div>
+
+      <div className="bottombar" />
     </>
   )
 }
