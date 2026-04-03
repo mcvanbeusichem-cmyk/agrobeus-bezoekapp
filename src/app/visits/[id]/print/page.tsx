@@ -43,10 +43,10 @@ export default async function PrintPage({ params }: PrintPageProps) {
         }
 
         /* ── Groene rand rondom de pagina ── */
-        .border-top    { position: fixed; top: 0; left: 0; right: 0; height: 14px; background: linear-gradient(to right, #1a4731, #2d6a4f, #52b788, #2d6a4f, #1a4731); z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-        .border-bottom { position: fixed; bottom: 0; left: 0; right: 0; height: 14px; background: linear-gradient(to right, #1a4731, #2d6a4f, #52b788, #2d6a4f, #1a4731); z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-        .border-left   { position: fixed; top: 0; left: 0; bottom: 0; width: 14px; background: linear-gradient(to bottom, #1a4731, #2d6a4f, #52b788, #2d6a4f, #1a4731); z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-        .border-right  { position: fixed; top: 0; right: 0; bottom: 0; width: 14px; background: linear-gradient(to bottom, #1a4731, #2d6a4f, #52b788, #2d6a4f, #1a4731); z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+        .border-top    { position: fixed; top: 0; left: 0; right: 0; height: 12px; background: #4a8a3a; z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+        .border-bottom { position: fixed; bottom: 0; left: 0; right: 0; height: 12px; background: #4a8a3a; z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+        .border-left   { position: fixed; top: 0; left: 0; bottom: 0; width: 12px; background: #4a8a3a; z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+        .border-right  { position: fixed; top: 0; right: 0; bottom: 0; width: 12px; background: #4a8a3a; z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
 
         /* ── Watermark peer (groot, vaag, gecentreerd) ── */
         .watermark {
@@ -73,7 +73,7 @@ export default async function PrintPage({ params }: PrintPageProps) {
           z-index: 1;
           max-width: 800px;
           margin: 0 auto;
-          padding: 42px 52px 48px;
+          padding: 22px 52px 36px;
         }
 
         /* ── Header ── */
@@ -81,9 +81,9 @@ export default async function PrintPage({ params }: PrintPageProps) {
           display: flex;
           justify-content: space-between;
           align-items: flex-start;
-          padding-bottom: 22px;
+          padding-bottom: 14px;
           border-bottom: 1.5px solid #d1fae5;
-          margin-bottom: 24px;
+          margin-bottom: 16px;
         }
         .header-left .logo {
           height: 80px;
@@ -306,7 +306,7 @@ export default async function PrintPage({ params }: PrintPageProps) {
         @media print {
           .no-print { display: none !important; }
           body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-          .page { padding: 28px 40px; }
+          .page { padding: 18px 36px 28px; }
           .border-top, .border-bottom, .border-left, .border-right {
             position: fixed;
             print-color-adjust: exact;
