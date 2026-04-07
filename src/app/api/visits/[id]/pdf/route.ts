@@ -39,7 +39,7 @@ export async function GET(
 
   const browser = await puppeteer.launch({
     args: chromium.args,
-    defaultViewport: { width: 1280, height: 900 },
+    defaultViewport: { width: 794, height: 1123 },
     executablePath: await chromium.executablePath(),
     headless: true,
   })
@@ -47,23 +47,6 @@ export async function GET(
   try {
     const page = await browser.newPage()
     await page.goto(printUrl, { waitUntil: 'networkidle0', timeout: 30000 })
-
-    // Compress photos to reduce PDF file size
-    await page.evaluate(() => {
-      const imgs = document.querySelectorAll<HTMLImageElement>('.photo-item img')
-      imgs.forEach((img) => {
-        if (!img.complete || img.naturalWidth === 0) return
-        const canvas = document.createElement('canvas')
-        const MAX = 600
-        const scale = Math.min(MAX / img.naturalWidth, MAX / img.naturalHeight, 1)
-        canvas.width = Math.round(img.naturalWidth * scale)
-        canvas.height = Math.round(img.naturalHeight * scale)
-        const ctx = canvas.getContext('2d')
-        if (!ctx) return
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-        img.src = canvas.toDataURL('image/jpeg', 0.75)
-      })
-    })
 
     const pdf = await page.pdf({
       format: 'A4',

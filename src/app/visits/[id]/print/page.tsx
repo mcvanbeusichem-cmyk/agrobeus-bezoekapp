@@ -335,7 +335,9 @@ export default async function PrintPage({ params, searchParams }: PrintPageProps
             -webkit-print-color-adjust: exact;
           }
           .footer { break-before: avoid; page-break-before: avoid; }
-          .section, .client-card, .followup-box { break-inside: avoid; page-break-inside: avoid; }
+          .client-card, .followup-box { break-inside: avoid; page-break-inside: avoid; }
+          .section-header { break-after: avoid; page-break-after: avoid; }
+          .photo-item img { max-width: 220px !important; max-height: 220px !important; width: 220px !important; height: 220px !important; }
         }
       `}</style>
 
