@@ -311,6 +311,8 @@ export default async function PrintPage({ params }: PrintPageProps) {
         }
 
         /* ── Print media ── */
+        @page { margin: 0; }
+
         @media print {
           .no-print { display: none !important; }
           body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
