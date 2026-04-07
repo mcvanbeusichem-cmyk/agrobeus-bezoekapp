@@ -4,9 +4,11 @@ import { PrintActions } from './PrintActions'
 
 interface PrintPageProps {
   params: { id: string }
+  searchParams: { pdf?: string }
 }
 
-export default async function PrintPage({ params }: PrintPageProps) {
+export default async function PrintPage({ params, searchParams }: PrintPageProps) {
+  const isServerPdf = searchParams.pdf === '1'
   const visit = await prisma.visit.findUnique({
     where: { id: params.id },
     include: { customer: true, photos: true },
@@ -62,10 +64,10 @@ export default async function PrintPage({ params }: PrintPageProps) {
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          width: 480px;
-          height: 290px;
+          width: 420px;
+          height: 240px;
           background-image: url('/logo.png');
-          background-size: 480px 480px;
+          background-size: 420px 420px;
           background-repeat: no-repeat;
           background-position: center top;
           opacity: 0.08;
@@ -313,7 +315,7 @@ export default async function PrintPage({ params }: PrintPageProps) {
         }
 
         /* ── Print media ── */
-        @page { margin: 0 0 12mm 0; }
+        @page { margin: ${isServerPdf ? '0' : '0 0 12mm 0'}; }
 
         @media print {
           .no-print { display: none !important; }
