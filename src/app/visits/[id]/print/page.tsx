@@ -111,6 +111,8 @@ export default async function PrintPage({ params }: PrintPageProps) {
           font-size: 11px;
           color: #6b7280;
           line-height: 1.85;
+          max-width: 55%;
+          word-break: break-word;
         }
         .header-right .person {
           font-size: 13px;
@@ -311,12 +313,12 @@ export default async function PrintPage({ params }: PrintPageProps) {
         }
 
         /* ── Print media ── */
-        @page { margin: 0; }
+        @page { margin: 0 0 12mm 0; }
 
         @media print {
           .no-print { display: none !important; }
           body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-          .page { padding: 18px 36px 28px; }
+          .page { padding: 18px 48px 28px; }
           .border-top, .border-bottom, .border-left, .border-right {
             position: fixed;
             print-color-adjust: exact;
