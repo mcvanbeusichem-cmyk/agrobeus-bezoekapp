@@ -29,6 +29,14 @@ export default async function PrintPage({ params }: PrintPageProps) {
     year: 'numeric',
   })
 
+  const visitDateFormatted = new Date(visit.visitDate).toLocaleDateString('nl-NL', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  }).replace(/\//g, '-')
+
+  const filename = `Bezoekverslag_${visit.customer.companyName.replace(/\s+/g, '_')}_${visitDateFormatted}`
+
   return (
     <>
       <style>{`
@@ -54,13 +62,13 @@ export default async function PrintPage({ params }: PrintPageProps) {
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          width: 680px;
-          height: 680px;
+          width: 480px;
+          height: 290px;
           background-image: url('/logo.png');
-          background-size: contain;
+          background-size: 480px 480px;
           background-repeat: no-repeat;
-          background-position: center;
-          opacity: 0.055;
+          background-position: center top;
+          opacity: 0.08;
           pointer-events: none;
           z-index: 0;
           print-color-adjust: exact;
@@ -140,7 +148,7 @@ export default async function PrintPage({ params }: PrintPageProps) {
         /* ── Klantkaart ── */
         .client-card {
           display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
+          grid-template-columns: 1fr 1fr;
           border: 1px solid #bbf7d0;
           border-radius: 8px;
           overflow: hidden;
@@ -151,8 +159,8 @@ export default async function PrintPage({ params }: PrintPageProps) {
           padding: 11px 15px;
           border-right: 1px solid #d1fae5;
         }
-        .client-field:last-child { border-right: none; }
-        .client-field:nth-child(n+4) { border-top: 1px solid #d1fae5; }
+        .client-field:nth-child(even) { border-right: none; }
+        .client-field:nth-child(n+3) { border-top: 1px solid #d1fae5; }
         .client-field label {
           display: block;
           font-size: 9px;
@@ -325,7 +333,7 @@ export default async function PrintPage({ params }: PrintPageProps) {
         }
       `}</style>
 
-      <PrintActions />
+      <PrintActions filename={filename} />
 
       {/* Groene rand rondom de pagina */}
       <div className="border-top" />
@@ -475,7 +483,7 @@ export default async function PrintPage({ params }: PrintPageProps) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo.png" alt="Agrobeus Consulting" className="footer-logo" />
           <div className="footer-text">
-            {visit.customer.companyName} &bull; {visit.visitDate}
+            {visit.customer.companyName} &bull; {formattedDate}
           </div>
         </div>
 

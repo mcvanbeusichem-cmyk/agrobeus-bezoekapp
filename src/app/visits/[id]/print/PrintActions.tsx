@@ -1,6 +1,17 @@
 'use client'
 
-export function PrintActions() {
+interface PrintActionsProps {
+  filename: string
+}
+
+export function PrintActions({ filename }: PrintActionsProps) {
+  const handlePrint = () => {
+    const original = document.title
+    document.title = filename
+    window.print()
+    document.title = original
+  }
+
   return (
     <div className="no-print" style={{ display: 'flex', gap: '12px', padding: '16px', justifyContent: 'center' }}>
       <button
@@ -17,7 +28,7 @@ export function PrintActions() {
         Sluiten
       </button>
       <button
-        onClick={() => window.print()}
+        onClick={handlePrint}
         style={{
           padding: '10px 20px',
           border: 'none',

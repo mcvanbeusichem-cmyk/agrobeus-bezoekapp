@@ -68,7 +68,7 @@ async function generatePdf(visitId, outputPath) {
     '--disable-gpu',
     '--no-sandbox',
     '--run-all-compositor-stages-before-draw',
-    '--print-to-pdf-no-header',
+    '--no-pdf-header-footer',
     `--print-to-pdf="${outputPath}"`,
     `"${printUrl}"`,
   ].join(' ')
@@ -112,10 +112,17 @@ async function main() {
     const date = visit.visitDate || 'onbekend'
     const company = sanitize(visit.customer?.companyName || 'Onbekend')
     const title = sanitize(visit.title || 'Bezoek')
-    const filename = `${date}_${company}_${title}.pdf`
-    const outputPath = path.join(ONEDRIVE_FOLDER, filename)
+    const filename = `${date}_${title}.pdf`
 
-    log(`Exporteren: ${filename}`)
+    // Klantmap aanmaken indien nodig
+    const customerFolder = path.join(ONEDRIVE_FOLDER, company)
+    if (!fs.existsSync(customerFolder)) {
+      fs.mkdirSync(customerFolder, { recursive: true })
+      log(`Map aangemaakt: ${company}`)
+    }
+
+    const outputPath = path.join(customerFolder, filename)
+    log(`Exporteren: ${company}/${filename}`)
 
     try {
       await generatePdf(visit.id, outputPath)
