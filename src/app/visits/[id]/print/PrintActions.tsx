@@ -1,15 +1,35 @@
 'use client'
 
+import { useState } from 'react'
+import { useParams } from 'next/navigation'
+
 interface PrintActionsProps {
   filename: string
 }
 
 export function PrintActions({ filename }: PrintActionsProps) {
-  const handlePrint = () => {
-    const original = document.title
-    document.title = filename
-    window.print()
-    document.title = original
+  const params = useParams()
+  const visitId = params?.id as string
+  const [downloading, setDownloading] = useState(false)
+
+  async function handleDownloadPdf() {
+    setDownloading(true)
+    try {
+      const res = await fetch(`/api/visits/${visitId}/pdf`)
+      if (!res.ok) throw new Error('PDF generatie mislukt')
+      const blob = await res.blob()
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = filename
+      a.click()
+      URL.revokeObjectURL(url)
+    } catch (err) {
+      alert('PDF generatie mislukt. Probeer opnieuw.')
+      console.error(err)
+    } finally {
+      setDownloading(false)
+    }
   }
 
   return (
@@ -28,19 +48,20 @@ export function PrintActions({ filename }: PrintActionsProps) {
         Sluiten
       </button>
       <button
-        onClick={handlePrint}
+        onClick={handleDownloadPdf}
+        disabled={downloading}
         style={{
           padding: '10px 20px',
           border: 'none',
           borderRadius: '8px',
-          background: '#2d6a2d',
+          background: downloading ? '#6b9e6b' : '#2d6a2d',
           color: 'white',
-          cursor: 'pointer',
+          cursor: downloading ? 'not-allowed' : 'pointer',
           fontSize: '14px',
           fontWeight: '600',
         }}
       >
-        Afdrukken / Opslaan als PDF
+        {downloading ? 'PDF genereren...' : 'Opslaan als PDF'}
       </button>
     </div>
   )
