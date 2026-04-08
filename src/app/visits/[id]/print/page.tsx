@@ -39,195 +39,243 @@ export default async function PrintPage({ params, searchParams }: PrintPageProps
 
   const filename = `Bezoekverslag_${visit.customer.companyName.replace(/\s+/g, '_')}_${visitDateFormatted}`
 
+  const followUpFormatted = visit.followUpDate
+    ? new Date(visit.followUpDate).toLocaleDateString('nl-NL', {
+        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+      })
+    : null
+
   return (
     <>
       <style>{`
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
           font-size: 13px;
           line-height: 1.6;
-          color: #1f2937;
+          color: #1a1a1a;
           background: #fff;
         }
 
-        /* ── Groene rand rondom de pagina ── */
-        .border-top    { position: fixed; top: 0; left: 0; right: 0; height: 12px; background: #4a8a3a; z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-        .border-bottom { position: fixed; bottom: 0; left: 0; right: 0; height: 12px; background: #4a8a3a; z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-        .border-left   { position: fixed; top: 0; left: 0; bottom: 0; width: 12px; background: #4a8a3a; z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-        .border-right  { position: fixed; top: 0; right: 0; bottom: 0; width: 12px; background: #4a8a3a; z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+        /* ── Groene rand ── */
+        .border-top    { position: fixed; top: 0; left: 0; right: 0; height: 6px; background: #3a7a2a; z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+        .border-bottom { position: fixed; bottom: 0; left: 0; right: 0; height: 6px; background: #3a7a2a; z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+        .border-left   { position: fixed; top: 0; left: 0; bottom: 0; width: 6px; background: #3a7a2a; z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+        .border-right  { position: fixed; top: 0; right: 0; bottom: 0; width: 6px; background: #3a7a2a; z-index: 10; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
 
-        /* ── Watermark peer (groot, vaag, gecentreerd) ── */
+        /* ── Watermark ── */
         .watermark {
           position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 420px;
-          height: 240px;
+          bottom: 60px;
+          right: 40px;
+          width: 160px;
+          height: 160px;
           background-image: url('/logo.png');
-          background-size: 420px 420px;
+          background-size: 160px 160px;
           background-repeat: no-repeat;
           background-position: center top;
-          opacity: 0.08;
+          opacity: 0.06;
           pointer-events: none;
           z-index: 0;
           print-color-adjust: exact;
           -webkit-print-color-adjust: exact;
         }
 
-        /* ── Pagina inhoud ── */
+        /* ── Pagina ── */
         .page {
           position: relative;
           z-index: 1;
-          max-width: 800px;
+          max-width: 780px;
           margin: 0 auto;
-          padding: 22px 52px 36px;
+          padding: 24px 44px 32px;
         }
 
         /* ── Header ── */
         .header {
           display: flex;
           justify-content: space-between;
-          align-items: flex-start;
-          padding-bottom: 14px;
-          border-bottom: 1.5px solid #d1fae5;
-          margin-bottom: 16px;
+          align-items: stretch;
+          margin-bottom: 0;
+        }
+        .header-left {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          padding-bottom: 18px;
+          border-bottom: 2px solid #3a7a2a;
+          flex: 1;
         }
         .header-left .logo {
-          height: 80px;
+          height: 58px;
           width: auto;
           display: block;
+          flex-shrink: 0;
         }
-        .header-left .doc-type {
-          margin-top: 8px;
+        .header-divider {
+          width: 1px;
+          background: #d0e8c8;
+          align-self: stretch;
+          margin: 4px 0;
+        }
+        .header-meta {
           font-size: 10px;
+          color: #4a6a3a;
+          line-height: 1.6;
+        }
+        .header-meta .doc-label {
+          font-size: 9px;
           font-weight: 700;
-          letter-spacing: 1.8px;
+          letter-spacing: 2px;
           text-transform: uppercase;
-          color: #2d6a4f;
+          color: #3a7a2a;
+          margin-bottom: 2px;
         }
         .header-right {
           text-align: right;
-          font-size: 11px;
-          color: #6b7280;
-          line-height: 1.85;
-          max-width: 55%;
-          word-break: break-word;
+          padding-bottom: 18px;
+          border-bottom: 2px solid #3a7a2a;
+          padding-left: 24px;
         }
         .header-right .person {
-          font-size: 13px;
+          font-size: 12px;
           font-weight: 700;
-          color: #1a3d2b;
+          color: #1a1a1a;
           display: block;
+          letter-spacing: 0.3px;
         }
         .header-right .role {
-          font-size: 11px;
-          color: #4b5563;
+          font-size: 9.5px;
+          color: #4a6a3a;
           display: block;
-          margin-bottom: 5px;
+          margin-bottom: 6px;
+          font-style: italic;
+        }
+        .header-right .contact {
+          font-size: 9.5px;
+          color: #666;
+          line-height: 1.7;
         }
 
-        /* ── Titelbalk ── */
-        .title-block {
-          background: #f0fdf4;
-          border-left: 5px solid #2d6a4f;
-          padding: 14px 18px;
-          margin-bottom: 22px;
-          border-radius: 0 8px 8px 0;
+        /* ── Titel sectie ── */
+        .title-section {
+          margin: 22px 0 20px;
+          padding-bottom: 18px;
+          border-bottom: 1px solid #e8f0e4;
         }
-        .title-block .report-title {
-          font-size: 19px;
+        .title-section .visit-title {
+          font-size: 22px;
           font-weight: 700;
-          color: #1a3d2b;
-          line-height: 1.3;
+          color: #1a2a14;
+          letter-spacing: -0.3px;
+          line-height: 1.2;
         }
-        .title-block .report-date {
+        .title-section .visit-meta {
+          margin-top: 6px;
           font-size: 11px;
-          color: #6b7280;
-          margin-top: 3px;
+          color: #6a8a5a;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+        .title-section .visit-meta .sep {
+          color: #c0d8b0;
         }
 
         /* ── Klantkaart ── */
         .client-card {
+          background: #f7fbf4;
+          border: 1px solid #d0e8c0;
+          border-radius: 6px;
+          overflow: hidden;
+          margin-bottom: 22px;
+        }
+        .client-card-header {
+          background: #3a7a2a;
+          padding: 7px 14px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .client-card-header span {
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.9);
+        }
+        .client-card-header .dot {
+          width: 5px; height: 5px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.5);
+        }
+        .client-fields {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          border: 1px solid #bbf7d0;
-          border-radius: 8px;
-          overflow: hidden;
-          margin-bottom: 24px;
-          background: white;
         }
         .client-field {
-          padding: 11px 15px;
-          border-right: 1px solid #d1fae5;
+          padding: 10px 14px;
+          border-right: 1px solid #e0f0d8;
+          border-bottom: 1px solid #e0f0d8;
         }
         .client-field:nth-child(even) { border-right: none; }
-        .client-field:nth-child(n+3) { border-top: 1px solid #d1fae5; }
+        .client-field:nth-last-child(-n+2) { border-bottom: none; }
+        .client-field:last-child:nth-child(odd) { border-bottom: none; grid-column: span 2; }
         .client-field label {
           display: block;
-          font-size: 9px;
+          font-size: 8.5px;
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.8px;
-          color: #2d6a4f;
+          color: #3a7a2a;
           margin-bottom: 3px;
         }
         .client-field p {
-          font-size: 13px;
-          color: #1f2937;
+          font-size: 12.5px;
+          color: #1a1a1a;
           font-weight: 500;
         }
 
         /* ── Secties ── */
-        .section { margin-bottom: 22px; }
+        .section { margin-bottom: 20px; }
         .section-header {
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 10px;
           margin-bottom: 10px;
-        }
-        .section-dot {
-          width: 8px; height: 8px;
-          border-radius: 50%;
-          background: #2d6a4f;
-          flex-shrink: 0;
+          padding-bottom: 6px;
+          border-bottom: 1px solid #e0eed8;
         }
         .section-title {
-          font-size: 10px;
+          font-size: 9px;
           font-weight: 700;
           text-transform: uppercase;
-          letter-spacing: 1px;
-          color: #2d6a4f;
-        }
-        .section-line {
-          flex: 1;
-          height: 1px;
-          background: #d1fae5;
+          letter-spacing: 1.5px;
+          color: #3a7a2a;
+          white-space: nowrap;
         }
         .section-content {
-          font-size: 13px;
-          color: #374151;
-          line-height: 1.75;
+          font-size: 12.5px;
+          color: #333;
+          line-height: 1.7;
           white-space: pre-wrap;
-          padding-left: 16px;
         }
 
         /* ── Actiepunten ── */
-        .action-list { list-style: none; padding-left: 16px; }
+        .action-list { list-style: none; }
         .action-list li {
           display: flex;
           align-items: flex-start;
           gap: 10px;
-          margin-bottom: 6px;
-          font-size: 13px;
-          color: #374151;
+          margin-bottom: 7px;
+          font-size: 12.5px;
+          color: #333;
+          line-height: 1.5;
         }
         .action-check {
-          width: 15px; height: 15px;
-          border: 1.5px solid #2d6a4f;
-          border-radius: 4px;
+          width: 13px; height: 13px;
+          border: 1.5px solid #3a7a2a;
+          border-radius: 3px;
           flex-shrink: 0;
           margin-top: 2px;
         }
@@ -236,35 +284,26 @@ export default async function PrintPage({ params, searchParams }: PrintPageProps
         .followup-box {
           display: flex;
           align-items: center;
-          gap: 14px;
-          background: #f0fdf4;
-          border: 1px solid #bbf7d0;
-          border-radius: 8px;
-          padding: 14px 18px;
-          margin-bottom: 22px;
-        }
-        .followup-icon {
-          width: 36px; height: 36px;
-          background: #2d6a4f;
-          border-radius: 8px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-          font-size: 16px;
+          gap: 16px;
+          background: #f0fae8;
+          border-left: 4px solid #3a7a2a;
+          border-radius: 0 6px 6px 0;
+          padding: 12px 16px;
+          margin-bottom: 20px;
         }
         .followup-label {
-          font-size: 10px;
+          font-size: 9px;
           font-weight: 700;
           text-transform: uppercase;
-          letter-spacing: 0.8px;
-          color: #2d6a4f;
-          margin-bottom: 2px;
+          letter-spacing: 1px;
+          color: #3a7a2a;
+          margin-bottom: 3px;
         }
         .followup-date {
-          font-size: 14px;
+          font-size: 13px;
           font-weight: 600;
-          color: #1a3d2b;
+          color: #1a2a14;
+          text-transform: capitalize;
         }
 
         /* ── Foto's ── */
@@ -272,29 +311,45 @@ export default async function PrintPage({ params, searchParams }: PrintPageProps
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 8px;
-          padding-left: 16px;
         }
         .photo-item img {
           width: 100%;
           aspect-ratio: 1;
           object-fit: cover;
-          border-radius: 6px;
-          border: 1px solid #e5e7eb;
+          border-radius: 4px;
+          border: 1px solid #ddeedd;
         }
 
         /* ── Footer ── */
         .footer {
-          margin-top: 36px;
-          padding-top: 16px;
-          border-top: 1px solid #d1fae5;
+          margin-top: 32px;
+          padding-top: 12px;
+          border-top: 1px solid #d8ecd0;
           display: flex;
           align-items: center;
           justify-content: space-between;
         }
-        .footer-logo { height: 26px; width: auto; opacity: 0.6; }
-        .footer-text { font-size: 11px; color: #9ca3af; text-align: right; }
+        .footer-left {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .footer-logo { height: 22px; width: auto; opacity: 0.5; }
+        .footer-brand {
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          color: #8aaa7a;
+        }
+        .footer-text {
+          font-size: 9.5px;
+          color: #aaa;
+          text-align: right;
+          line-height: 1.6;
+        }
 
-        /* ── Knoppen (niet printen) ── */
+        /* ── Knoppen ── */
         .no-print {
           position: fixed;
           top: 20px; right: 24px;
@@ -303,53 +358,43 @@ export default async function PrintPage({ params, searchParams }: PrintPageProps
         }
         .btn-close {
           background: white; border: 1px solid #d1d5db;
-          border-radius: 8px; padding: 8px 16px;
-          font-size: 14px; font-weight: 500; color: #374151;
-          cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          border-radius: 6px; padding: 8px 16px;
+          font-size: 13px; font-weight: 500; color: #555;
+          cursor: pointer;
         }
         .btn-print {
-          background: #2d6a4f; border: none;
-          border-radius: 8px; padding: 8px 16px;
-          font-size: 14px; font-weight: 500; color: white;
-          cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          background: #3a7a2a; border: none;
+          border-radius: 6px; padding: 8px 18px;
+          font-size: 13px; font-weight: 600; color: white;
+          cursor: pointer;
         }
 
-        /* ── Print media ── */
+        /* ── Print ── */
         @page { margin: ${isServerPdf ? '0' : '0 0 12mm 0'}; }
 
         @media print {
           .no-print { display: none !important; }
           body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-          .page { padding: 18px 48px 28px; }
-          .border-top, .border-bottom, .border-left, .border-right {
-            position: fixed;
-            print-color-adjust: exact;
-            -webkit-print-color-adjust: exact;
-          }
-          .watermark {
-            print-color-adjust: exact;
-            -webkit-print-color-adjust: exact;
-          }
-          .title-block, .followup-box, .client-card {
+          .page { padding: 20px 40px 28px; }
+          .border-top, .border-bottom, .border-left, .border-right,
+          .watermark, .client-card, .client-card-header,
+          .followup-box, .title-section {
             print-color-adjust: exact;
             -webkit-print-color-adjust: exact;
           }
           .footer { break-before: avoid; page-break-before: avoid; }
           .client-card, .followup-box { break-inside: avoid; page-break-inside: avoid; }
           .section-header { break-after: avoid; page-break-after: avoid; }
-          .photo-item img { max-width: 220px !important; max-height: 220px !important; width: 220px !important; height: 220px !important; }
+          .photo-item img { max-width: 180px !important; max-height: 180px !important; width: 180px !important; height: 180px !important; }
         }
       `}</style>
 
       <PrintActions filename={filename} />
 
-      {/* Groene rand rondom de pagina */}
       <div className="border-top" />
       <div className="border-bottom" />
       <div className="border-left" />
       <div className="border-right" />
-
-      {/* Groot vaag logo als watermark */}
       <div className="watermark" />
 
       <div className="page">
@@ -359,61 +404,69 @@ export default async function PrintPage({ params, searchParams }: PrintPageProps
           <div className="header-left">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo.png" alt="Agrobeus Consulting" className="logo" />
-            <div className="doc-type">Bezoekverslag</div>
+            <div className="header-divider" />
+            <div className="header-meta">
+              <div className="doc-label">Bezoekverslag</div>
+              Fruitteelt &amp; Tuinbouw Consultancy
+            </div>
           </div>
           <div className="header-right">
             <span className="person">Marco van Beusichem</span>
-            <span className="role">Internationaal Fruitconsultant · Advies in Fruitteelt</span>
-            Hoofdstraat 49, 4041 AB Kesteren<br />
-            +31 6 54950432 · info@agrobeus.com<br />
-            www.agrobeus.com
+            <span className="role">Internationaal Fruitconsultant &middot; Advies in Fruitteelt</span>
+            <div className="contact">
+              Hoofdstraat 49, 4041 AB Kesteren<br />
+              +31 6 54950432 &nbsp;&middot;&nbsp; info@agrobeus.com<br />
+              www.agrobeus.com
+            </div>
           </div>
         </div>
 
         {/* Titel */}
-        <div className="title-block">
-          <div className="report-title">{visit.title}</div>
-          <div className="report-date">Aangemaakt op {now}</div>
+        <div className="title-section">
+          <div className="visit-title">{visit.title}</div>
+          <div className="visit-meta">
+            <span style={{ textTransform: 'capitalize' }}>{formattedDate}</span>
+            <span className="sep">&bull;</span>
+            <span>{visit.customer.companyName}</span>
+            <span className="sep">&bull;</span>
+            <span>{visit.visitTime} uur</span>
+          </div>
         </div>
 
         {/* Klantgegevens */}
         <div className="client-card">
-          <div className="client-field">
-            <label>Bedrijf</label>
-            <p>{visit.customer.companyName}</p>
+          <div className="client-card-header">
+            <div className="dot" />
+            <span>Klantgegevens</span>
           </div>
-          <div className="client-field">
-            <label>Contactpersoon</label>
-            <p>{visit.customer.contactName}</p>
-          </div>
-          <div className="client-field">
-            <label>Datum</label>
-            <p style={{ textTransform: 'capitalize' }}>{formattedDate}</p>
-          </div>
-          <div className="client-field">
-            <label>Tijd</label>
-            <p>{visit.visitTime} uur</p>
-          </div>
-          {visit.customer.address && (
+          <div className="client-fields">
             <div className="client-field">
-              <label>Adres</label>
-              <p>{visit.customer.address}</p>
+              <label>Bedrijf</label>
+              <p>{visit.customer.companyName}</p>
             </div>
-          )}
-          {visit.customer.cropType && visit.customer.cropType !== '-' && (
             <div className="client-field">
-              <label>Gewas</label>
-              <p>{visit.customer.cropType}</p>
+              <label>Contactpersoon</label>
+              <p>{visit.customer.contactName}</p>
             </div>
-          )}
+            {visit.customer.address && (
+              <div className="client-field">
+                <label>Adres</label>
+                <p>{visit.customer.address}</p>
+              </div>
+            )}
+            {visit.customer.cropType && visit.customer.cropType !== '-' && (
+              <div className="client-field">
+                <label>Gewas</label>
+                <p>{visit.customer.cropType}</p>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Verslag */}
         <div className="section">
           <div className="section-header">
-            <div className="section-dot" />
             <div className="section-title">Verslag</div>
-            <div className="section-line" />
           </div>
           <div className="section-content">{visit.report}</div>
         </div>
@@ -422,9 +475,7 @@ export default async function PrintPage({ params, searchParams }: PrintPageProps
         {visit.advice && (
           <div className="section">
             <div className="section-header">
-              <div className="section-dot" />
               <div className="section-title">Advies</div>
-              <div className="section-line" />
             </div>
             <div className="section-content">{visit.advice}</div>
           </div>
@@ -434,9 +485,7 @@ export default async function PrintPage({ params, searchParams }: PrintPageProps
         {visit.actionPoints && (
           <div className="section">
             <div className="section-header">
-              <div className="section-dot" />
               <div className="section-title">Actiepunten</div>
-              <div className="section-line" />
             </div>
             <ul className="action-list">
               {visit.actionPoints.split('\n').filter(Boolean).map((point, i) => (
@@ -450,19 +499,11 @@ export default async function PrintPage({ params, searchParams }: PrintPageProps
         )}
 
         {/* Vervolgafspraak */}
-        {visit.followUpDate && (
+        {followUpFormatted && (
           <div className="followup-box">
-            <div className="followup-icon">📅</div>
             <div>
               <div className="followup-label">Vervolgafspraak</div>
-              <div className="followup-date">
-                {new Date(visit.followUpDate).toLocaleDateString('nl-NL', {
-                  weekday: 'long',
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric',
-                })}
-              </div>
+              <div className="followup-date">{followUpFormatted}</div>
             </div>
           </div>
         )}
@@ -471,9 +512,7 @@ export default async function PrintPage({ params, searchParams }: PrintPageProps
         {visit.photos && visit.photos.length > 0 && (
           <div className="section">
             <div className="section-header">
-              <div className="section-dot" />
               <div className="section-title">Foto&apos;s</div>
-              <div className="section-line" />
             </div>
             <div className="photos-grid">
               {visit.photos.map((photo) => (
@@ -488,10 +527,14 @@ export default async function PrintPage({ params, searchParams }: PrintPageProps
 
         {/* Footer */}
         <div className="footer">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="Agrobeus Consulting" className="footer-logo" />
+          <div className="footer-left">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="Agrobeus" className="footer-logo" />
+            <span className="footer-brand">Agrobeus Consulting</span>
+          </div>
           <div className="footer-text">
-            {visit.customer.companyName} &bull; {formattedDate}
+            {visit.customer.companyName} &bull; {formattedDate}<br />
+            Aangemaakt op {now}
           </div>
         </div>
 
