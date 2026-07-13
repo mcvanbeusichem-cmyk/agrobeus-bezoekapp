@@ -16,7 +16,7 @@ const https = require('https')
 
 // ── Instellingen ─────────────────────────────────────────────
 const APP_URL = 'https://agrobeus.vercel.app'
-const ONEDRIVE_FOLDER = '/Users/marcovanbeusichem/Library/CloudStorage/OneDrive-Persoonlijk/Werk/Consulting/Klantenbezoeken'
+const ONEDRIVE_FOLDER = '/Users/marcovanbeusichem/Library/CloudStorage/OneDrive-Persoonlijk/Werk/Agrobeus Consulting/Klanten/Klantenbezoeken'
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 const EXPORTED_FILE = path.join(__dirname, '.exported-visits.json')
 const LOG_FILE = path.join(__dirname, 'export.log')
@@ -73,7 +73,7 @@ async function generatePdf(visitId, outputPath) {
     `"${printUrl}"`,
   ].join(' ')
 
-  execSync(cmd, { timeout: 30000 })
+  execSync(cmd, { timeout: 120000 })
 }
 
 async function main() {
