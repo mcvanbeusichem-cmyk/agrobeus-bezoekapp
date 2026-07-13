@@ -34,6 +34,7 @@ function sanitize(str) {
     .replace(/\s+/g, '_')
     .replace(/_+/g, '_')
     .replace(/^_|_$/g, '')
+    .replace(/[._]+$/, '') // geen punt/underscore aan het eind (ongeldig in OneDrive)
     .slice(0, 60)
 }
 
