@@ -86,10 +86,10 @@ async function main() {
     process.exit(1)
   }
 
-  // Haal afgeronde bezoeken op
+  // Haal alle bezoeken op (concept, verzonden én afgerond)
   let visits
   try {
-    visits = await fetchJson(`${APP_URL}/api/visits?status=afgerond`)
+    visits = await fetchJson(`${APP_URL}/api/visits`)
   } catch (err) {
     log(`FOUT bij ophalen bezoeken: ${err.message}`)
     process.exit(1)
@@ -100,20 +100,47 @@ async function main() {
     process.exit(1)
   }
 
-  log(`${visits.length} afgeronde bezoek(en) gevonden`)
+  log(`${visits.length} bezoek(en) gevonden`)
 
   const exported = loadExported()
   let newCount = 0
 
   for (const visit of visits) {
-    if (exported[visit.id]) {
-      continue // Al eerder geëxporteerd
+    const entry = exported[visit.id]
+
+    // Overslaan als al geëxporteerd en niet gewijzigd sindsdien
+    if (entry) {
+      const upToDate = entry.updatedAt
+        ? entry.updatedAt === visit.updatedAt
+        : !visit.updatedAt || new Date(visit.updatedAt) <= new Date(entry.exportedAt)
+      if (upToDate) continue
     }
 
+    const status = visit.status || 'concept'
+    const suffix = status === 'afgerond' ? '' : `_${status.toUpperCase()}`
     const date = visit.visitDate || 'onbekend'
     const company = sanitize(visit.customer?.companyName || 'Onbekend')
     const title = sanitize(visit.title || 'Bezoek')
-    const filename = `${date}_${title}.pdf`
+    let filename = `${date}_${title}${suffix}.pdf`
+
+    // Botsingsbeveiliging: als een ánder bezoek deze bestandsnaam al gebruikt,
+    // voeg de bezoektijd toe zodat beide PDF's blijven bestaan
+    const claimedByOther = Object.entries(exported).some(
+      ([id, e]) => id !== visit.id && e && e.company === visit.customer?.companyName && e.filename === filename
+    )
+    if (claimedByOther) {
+      const time = (visit.visitTime || '').replace(':', '.')
+      filename = `${date}_${title}${time ? '_' + time : '_2'}${suffix}.pdf`
+    }
+
+    // Oude versie opruimen (bijv. concept-PDF na afronden, of gewijzigde titel)
+    if (entry && entry.filename) {
+      const oldPath = path.join(ONEDRIVE_FOLDER, sanitize(entry.company || ''), entry.filename)
+      if (oldPath !== path.join(ONEDRIVE_FOLDER, company, filename) && fs.existsSync(oldPath)) {
+        try { fs.unlinkSync(oldPath); log(`  Oude versie verwijderd: ${entry.filename}`) }
+        catch (e) { log(`  Kon oude versie niet verwijderen: ${e.message}`) }
+      }
+    }
 
     // Klantmap aanmaken indien nodig
     const customerFolder = path.join(ONEDRIVE_FOLDER, company)
@@ -141,6 +168,8 @@ async function main() {
       exported[visit.id] = {
         filename,
         exportedAt: new Date().toISOString(),
+        updatedAt: visit.updatedAt,
+        status,
         visitDate: visit.visitDate,
         company: visit.customer?.companyName,
       }

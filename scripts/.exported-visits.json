@@ -1,22 +1,4 @@
 {
-  "cmnbdxorb0003j243mqccjrr8": {
-    "filename": "2026-03-29_A.C._van_Blijderveen_Fruit_B.V._Test.pdf",
-    "exportedAt": "2026-03-29T07:14:38.439Z",
-    "visitDate": "2026-03-29",
-    "company": "A.C. van Blijderveen Fruit B.V."
-  },
-  "cmndb5ltd0001uudqjrju1jly": {
-    "filename": "2026-03-30_Perenbladvlo.pdf",
-    "exportedAt": "2026-03-30T14:57:03.043Z",
-    "visitDate": "2026-03-30",
-    "company": "Fruitteeltbedrijf De Hoge Akker"
-  },
-  "cmndaje0j0001l0s2a5f5kqok": {
-    "filename": "2026-03-30_Fruitteeltbedrijf_De_Hoge_Akker_Perenbladvlo.pdf",
-    "exportedAt": "2026-03-30T14:57:08.226Z",
-    "visitDate": "2026-03-30",
-    "company": "Fruitteeltbedrijf De Hoge Akker"
-  },
   "cmng0qcrs0001ij9ll6bbyp1n": {
     "filename": "2026-04-01_Perenbladvlo.pdf",
     "exportedAt": "2026-04-01T15:18:16.906Z",
@@ -520,5 +502,453 @@
     "exportedAt": "2026-07-13T20:21:51.928Z",
     "visitDate": "2026-07-06",
     "company": "Cornelissen fruit en boomkwekerijen"
+  },
+  "cmrj4xlcw000114dd1fl5x0u4": {
+    "filename": "2026-07-13_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:28:13.288Z",
+    "updatedAt": "2026-07-13T12:06:55.123Z",
+    "status": "concept",
+    "visitDate": "2026-07-13",
+    "company": "Fruitbedrijf van Weelie"
+  },
+  "cmrd6m5p90001tr8w7xlpsi1f": {
+    "filename": "2026-07-09_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:28:23.292Z",
+    "updatedAt": "2026-07-09T09:06:41.466Z",
+    "status": "concept",
+    "visitDate": "2026-07-09",
+    "company": "Fruitbedrijf Copier B.V."
+  },
+  "cmrbvl98d0001p51151tiqhxf": {
+    "filename": "2026-07-08_Roestmijt_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:28:25.894Z",
+    "updatedAt": "2026-07-08T11:35:01.330Z",
+    "status": "concept",
+    "visitDate": "2026-07-08",
+    "company": "Fruit- en Boomkwekerij Brokken vof"
+  },
+  "cmrai4xi50001byb32wupvhdg": {
+    "filename": "2026-07-07_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:28:28.577Z",
+    "updatedAt": "2026-07-07T11:36:46.428Z",
+    "status": "concept",
+    "visitDate": "2026-07-07",
+    "company": "Van Wijk Fruit"
+  },
+  "cmr5zo8760001vvqb3qpoyslj": {
+    "filename": "2026-07-04_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:28:36.673Z",
+    "updatedAt": "2026-07-04T08:38:53.656Z",
+    "status": "concept",
+    "visitDate": "2026-07-04",
+    "company": "Fruitbedrijf van Westende"
+  },
+  "cmr36duta00012ikq3wdxqbi1": {
+    "filename": "2026-07-02_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:28:39.682Z",
+    "updatedAt": "2026-07-02T08:08:26.890Z",
+    "status": "concept",
+    "visitDate": "2026-07-02",
+    "company": "Van Woudenberg Fruit"
+  },
+  "cmqytgugc000110dnwjnhjp2d": {
+    "filename": "2026-06-29_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:28:42.111Z",
+    "updatedAt": "2026-06-29T06:58:06.135Z",
+    "status": "concept",
+    "visitDate": "2026-06-29",
+    "company": "Fruit- en Boomkwekerij Brokken vof"
+  },
+  "cmqoy3ma20001p0hpstzn02lk": {
+    "filename": "2026-06-22_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:28:44.616Z",
+    "updatedAt": "2026-06-22T09:35:45.773Z",
+    "status": "concept",
+    "visitDate": "2026-06-22",
+    "company": "A.C. van Blijderveen Fruit B.V."
+  },
+  "cmqq71htx0001rkfze724tm1v": {
+    "filename": "2026-06-20_Controle_en_observatie_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:28:46.972Z",
+    "updatedAt": "2026-06-23T05:19:02.325Z",
+    "status": "concept",
+    "visitDate": "2026-06-20",
+    "company": "Alkema Fruit VOF"
+  },
+  "cmqm206ys0001o4e6w42fx4tv": {
+    "filename": "2026-06-20_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:28:52.804Z",
+    "updatedAt": "2026-06-20T08:16:53.088Z",
+    "status": "concept",
+    "visitDate": "2026-06-20",
+    "company": "Fruitteeltbedrijf van Zee"
+  },
+  "cmqlwc0bv0001ujpdn3pzh26c": {
+    "filename": "2026-06-20_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:28:55.491Z",
+    "updatedAt": "2026-06-20T05:07:28.552Z",
+    "status": "concept",
+    "visitDate": "2026-06-20",
+    "company": "Fruitbedrijf van Gils"
+  },
+  "cmqhuino20001h4n6gosl5c1b": {
+    "filename": "2026-06-17_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:29:04.889Z",
+    "updatedAt": "2026-06-17T10:11:06.944Z",
+    "status": "concept",
+    "visitDate": "2026-06-17",
+    "company": "Fruitbedrijf Copier B.V."
+  },
+  "cmqhnzyyc00014dkpxsuy17ct": {
+    "filename": "2026-06-17_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:29:08.656Z",
+    "updatedAt": "2026-06-17T06:03:05.265Z",
+    "status": "concept",
+    "visitDate": "2026-06-17",
+    "company": "Van Woudenberg Fruit"
+  },
+  "cmq0rprry0001xn6o5izkzmro": {
+    "filename": "2026-06-05_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:29:17.441Z",
+    "updatedAt": "2026-06-05T11:28:38.475Z",
+    "status": "concept",
+    "visitDate": "2026-06-05",
+    "company": "Fruitteeltbedrijf Landrust B.V."
+  },
+  "cmq0llol3000115rfzchk0oa6": {
+    "filename": "2026-06-05_Perenbladvlo_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:29:19.955Z",
+    "updatedAt": "2026-06-05T08:11:24.614Z",
+    "status": "concept",
+    "visitDate": "2026-06-05",
+    "company": "N. van Maaswaal Eurocool"
+  },
+  "cmpy0fhmm00015ni49k35xu4r": {
+    "filename": "2026-06-03_Controle_boomgaard_VERZONDEN.pdf",
+    "exportedAt": "2026-07-13T20:29:40.803Z",
+    "updatedAt": "2026-06-03T15:23:20.508Z",
+    "status": "verzonden",
+    "visitDate": "2026-06-03",
+    "company": "Cornelissen fruit en boomkwekerijen"
+  },
+  "cmpxqzsri000114as4pzhge3p": {
+    "filename": "2026-06-03_Perenbladvlo_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:29:46.759Z",
+    "updatedAt": "2026-06-03T09:23:51.824Z",
+    "status": "concept",
+    "visitDate": "2026-06-03",
+    "company": "Van Arkel Fruit B.V."
+  },
+  "cmpwc2qar00012jw3ujg4cy3t": {
+    "filename": "2026-06-02_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:30:32.948Z",
+    "updatedAt": "2026-06-03T07:08:21.242Z",
+    "status": "concept",
+    "visitDate": "2026-06-02",
+    "company": "Maatschap H.C. en J.P. Peters"
+  },
+  "cmpv2who9000146nhm1stl69r": {
+    "filename": "2026-06-01_Perenbladvlo_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:30:41.310Z",
+    "updatedAt": "2026-06-01T12:10:22.621Z",
+    "status": "concept",
+    "visitDate": "2026-06-01",
+    "company": "D.A. van Maaswaal B.V."
+  },
+  "cmprx40s70001jn8c25j8f302": {
+    "filename": "2026-05-30_Perenbladvlo_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:30:43.883Z",
+    "updatedAt": "2026-05-30T05:47:39.579Z",
+    "status": "concept",
+    "visitDate": "2026-05-30",
+    "company": "Fruitbedrijf van Westende"
+  },
+  "cmpqjbvy40001137k27ctaizo": {
+    "filename": "2026-05-29_Perenbladvlo_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:31:00.553Z",
+    "updatedAt": "2026-05-29T06:49:13.112Z",
+    "status": "concept",
+    "visitDate": "2026-05-29",
+    "company": "Koolwijk"
+  },
+  "cmppg0cy50001qwpp1k5grt1i": {
+    "filename": "2026-05-28_Perenbladvlo_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:31:03.298Z",
+    "updatedAt": "2026-05-28T15:18:43.738Z",
+    "status": "concept",
+    "visitDate": "2026-05-28",
+    "company": "Fruitbedrijf Copier B.V."
+  },
+  "cmppb8i4s0001pg9e01e8ns2l": {
+    "filename": "2026-05-28_Perenbladvlo_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:31:05.661Z",
+    "updatedAt": "2026-05-28T10:35:26.763Z",
+    "status": "concept",
+    "visitDate": "2026-05-28",
+    "company": "Fruitteeltbedrijf R. Hoogendoorn"
+  },
+  "cmpnpa73b0001ge5ty2n65e9o": {
+    "filename": "2026-05-27_Perenbladvlo_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:31:10.272Z",
+    "updatedAt": "2026-05-27T08:01:07.182Z",
+    "status": "concept",
+    "visitDate": "2026-05-27",
+    "company": "Van Arkel Fruit B.V."
+  },
+  "cmpdq70gn00011x6vsyaxwuex": {
+    "filename": "2026-05-20_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:31:12.567Z",
+    "updatedAt": "2026-05-20T11:05:31.183Z",
+    "status": "concept",
+    "visitDate": "2026-05-20",
+    "company": "D.A. van Maaswaal B.V."
+  },
+  "cmpcbrxaj0001lka22tog2hwz": {
+    "filename": "2026-05-19_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:31:17.859Z",
+    "updatedAt": "2026-05-19T10:09:47.098Z",
+    "status": "concept",
+    "visitDate": "2026-05-19",
+    "company": "Maatschap H.C. en J.P. Peters"
+  },
+  "cmpc89tes0001ympawfapulsw": {
+    "filename": "2026-05-19_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:31:20.359Z",
+    "updatedAt": "2026-05-19T07:34:06.201Z",
+    "status": "concept",
+    "visitDate": "2026-05-19",
+    "company": "Pouwer Fruit"
+  },
+  "cmpb6qxk2000153xw4ffudljm": {
+    "filename": "2026-05-18_Controle_VERZONDEN.pdf",
+    "exportedAt": "2026-07-13T20:31:22.796Z",
+    "updatedAt": "2026-05-18T14:21:42.537Z",
+    "status": "verzonden",
+    "visitDate": "2026-05-18",
+    "company": "A.C. van Blijderveen Fruit B.V."
+  },
+  "cmp85q7370001akow8xvx0hud": {
+    "filename": "2026-05-16_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:31:25.251Z",
+    "updatedAt": "2026-05-16T13:34:32.274Z",
+    "status": "concept",
+    "visitDate": "2026-05-16",
+    "company": "Fruitbedrijf van Gils"
+  },
+  "cmp6tzqwc0001gj8pqhr6ztiv": {
+    "filename": "2026-05-15_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:31:30.510Z",
+    "updatedAt": "2026-05-15T11:52:13.065Z",
+    "status": "concept",
+    "visitDate": "2026-05-15",
+    "company": "Cornelissen fruit en boomkwekerijen"
+  },
+  "cmp6lcivf0001mwxoxlbmjhl4": {
+    "filename": "2026-05-15_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:31:33.670Z",
+    "updatedAt": "2026-05-15T11:25:13.096Z",
+    "status": "concept",
+    "visitDate": "2026-05-15",
+    "company": "Fruit- en Boomkwekerij Brokken vof"
+  },
+  "cmp2dxdss000112l1c7p8kd5q": {
+    "filename": "2026-05-12_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:31:36.297Z",
+    "updatedAt": "2026-05-12T10:42:34.324Z",
+    "status": "concept",
+    "visitDate": "2026-05-12",
+    "company": "D.A. van Maaswaal B.V."
+  },
+  "cmou25zcz0001if7xpi29bwyn": {
+    "filename": "2026-05-06_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:31:38.727Z",
+    "updatedAt": "2026-05-06T13:39:59.354Z",
+    "status": "concept",
+    "visitDate": "2026-05-06",
+    "company": "Van Arkel Fruit B.V."
+  },
+  "cmotsl7x40001wp4q1q43boqb": {
+    "filename": "2026-05-06_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:31:42.078Z",
+    "updatedAt": "2026-05-06T10:18:24.447Z",
+    "status": "concept",
+    "visitDate": "2026-05-06",
+    "company": "Fruitteeltbedrijf R. Hoogendoorn"
+  },
+  "cmotoojjo0001qk5e2ti3vmch": {
+    "filename": "2026-05-06_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:32:27.059Z",
+    "updatedAt": "2026-05-06T07:42:02.016Z",
+    "status": "concept",
+    "visitDate": "2026-05-06",
+    "company": "Van Woudenberg Fruit"
+  },
+  "cmoqtxaou000113anbkrgmnxj": {
+    "filename": "2026-05-04_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:32:29.427Z",
+    "updatedAt": "2026-05-04T08:20:27.706Z",
+    "status": "concept",
+    "visitDate": "2026-05-04",
+    "company": "Pouwer Fruit"
+  },
+  "cmojrhs7x0001imyikm0wktcv": {
+    "filename": "2026-04-29_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:32:31.882Z",
+    "updatedAt": "2026-04-29T10:00:26.299Z",
+    "status": "concept",
+    "visitDate": "2026-04-29",
+    "company": "Fruitbedrijf van Westende"
+  },
+  "cmoifuemh0001tvj8xkgv88jo": {
+    "filename": "2026-04-28_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:32:34.691Z",
+    "updatedAt": "2026-04-28T10:22:15.294Z",
+    "status": "concept",
+    "visitDate": "2026-04-28",
+    "company": "Cornelissen fruit en boomkwekerijen"
+  },
+  "cmocizwp60001t02x1zsb3gxv": {
+    "filename": "2026-04-24_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:32:37.507Z",
+    "updatedAt": "2026-04-24T07:34:50.200Z",
+    "status": "concept",
+    "visitDate": "2026-04-24",
+    "company": "Koolwijk"
+  },
+  "cmobfjpss0001iqs4l95zdlpc": {
+    "filename": "2026-04-23_Perenbladvlo-dunning_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:32:39.882Z",
+    "updatedAt": "2026-04-23T12:02:23.774Z",
+    "status": "concept",
+    "visitDate": "2026-04-23",
+    "company": "Fruitbedrijf van Weelie"
+  },
+  "cmo3cx8et00025ycb15uelphl": {
+    "filename": "2026-04-17_Bezoek_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:32:42.519Z",
+    "updatedAt": "2026-04-17T20:25:12.686Z",
+    "status": "concept",
+    "visitDate": "2026-04-17",
+    "company": "Firma De Bruijn Maurik"
+  },
+  "cmo2myzd40001etwyi9f2rtim": {
+    "filename": "2026-04-17_Controle_VERZONDEN.pdf",
+    "exportedAt": "2026-07-13T20:32:44.966Z",
+    "updatedAt": "2026-04-17T08:53:13.440Z",
+    "status": "verzonden",
+    "visitDate": "2026-04-17",
+    "company": "D.J. Boer B.V."
+  },
+  "cmo16fo0e0001fobci5v8i3eq": {
+    "filename": "2026-04-16_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:32:47.343Z",
+    "updatedAt": "2026-04-16T08:44:14.065Z",
+    "status": "concept",
+    "visitDate": "2026-04-16",
+    "company": "Van Wijk Fruit"
+  },
+  "cmnwsl3y20001rggj85h2u7t8": {
+    "filename": "2026-04-13_Bezoek_percelen_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:33:32.169Z",
+    "updatedAt": "2026-04-13T08:37:48.855Z",
+    "status": "concept",
+    "visitDate": "2026-04-13",
+    "company": "Van Arkel Fruit B.V."
+  },
+  "cmnsp3iff0001kwaxya85ow8b": {
+    "filename": "2026-04-10_Scouting_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:33:41.851Z",
+    "updatedAt": "2026-04-10T11:01:12.163Z",
+    "status": "concept",
+    "visitDate": "2026-04-10",
+    "company": "V.o.f. Gebr. van Hilten"
+  },
+  "cmnq17ihg0001hu3zfjl9yxr4": {
+    "filename": "2026-04-08_Perenbladvlo_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:33:44.466Z",
+    "updatedAt": "2026-04-08T13:31:56.365Z",
+    "status": "concept",
+    "visitDate": "2026-04-08",
+    "company": "G.G.H. van Veldhoven"
+  },
+  "cmnpy30gm00011234pbvjux5f": {
+    "filename": "2026-04-08_Scouting_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:33:46.960Z",
+    "updatedAt": "2026-04-08T11:58:33.820Z",
+    "status": "concept",
+    "visitDate": "2026-04-08",
+    "company": "J. Stigter fruit"
+  },
+  "cmnpnqdb90001imf3q8t29dz8": {
+    "filename": "2026-04-08_Scouting_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:33:49.471Z",
+    "updatedAt": "2026-04-08T08:19:36.456Z",
+    "status": "concept",
+    "visitDate": "2026-04-08",
+    "company": "Fruitteeltbedrijf Landrust B.V."
+  },
+  "cmnoh738a0001r0p8jsgqxj4i": {
+    "filename": "2026-04-07_Controle_VERZONDEN.pdf",
+    "exportedAt": "2026-07-13T20:33:54.296Z",
+    "updatedAt": "2026-04-07T16:19:13.585Z",
+    "status": "verzonden",
+    "visitDate": "2026-04-07",
+    "company": "D.A. van Maaswaal B.V."
+  },
+  "cmnofc39c0001xd5uhvz12ha2": {
+    "filename": "2026-04-07_Controle_VERZONDEN.pdf",
+    "exportedAt": "2026-07-13T20:33:56.749Z",
+    "updatedAt": "2026-04-07T09:52:38.520Z",
+    "status": "verzonden",
+    "visitDate": "2026-04-07",
+    "company": "Koolwijk"
+  },
+  "cmno962h00001vekp2u5xqbym": {
+    "filename": "2026-04-07_Controle_VERZONDEN.pdf",
+    "exportedAt": "2026-07-13T20:33:59.214Z",
+    "updatedAt": "2026-04-07T08:27:38.542Z",
+    "status": "verzonden",
+    "visitDate": "2026-04-07",
+    "company": "A.C. van Blijderveen Fruit B.V."
+  },
+  "cmno74t9b0001spf9nqkjiqwz": {
+    "filename": "2026-04-07_Controle_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T21:53:08.094Z",
+    "updatedAt": "2026-07-13T20:55:32.133Z",
+    "status": "concept",
+    "visitDate": "2026-04-07",
+    "company": "Pouwer Fruit"
+  },
+  "cmniqa9tr00017ok1ztzer70s": {
+    "filename": "2026-04-03_Perenbladvlo_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:34:09.309Z",
+    "updatedAt": "2026-04-03T15:24:17.929Z",
+    "status": "concept",
+    "visitDate": "2026-04-03",
+    "company": "Fruitteeltbedrijf van Zee"
+  },
+  "cmnih6p7s0001c4t65bjqbf7i": {
+    "filename": "2026-04-03_Controle_peer_en_appel_CONCEPT.pdf",
+    "exportedAt": "2026-07-13T20:34:18.751Z",
+    "updatedAt": "2026-04-03T07:08:27.014Z",
+    "status": "concept",
+    "visitDate": "2026-04-03",
+    "company": "Fruitbedrijf van Gils"
+  },
+  "cmndaje0j0001l0s2a5f5kqok": {
+    "filename": "2026-03-30_Perenbladvlo.pdf",
+    "exportedAt": "2026-07-14T05:20:53.803Z",
+    "updatedAt": "2026-03-30T14:36:04.910Z",
+    "status": "afgerond",
+    "visitDate": "2026-03-30",
+    "company": "Fruitteeltbedrijf De Hoge Akker"
+  },
+  "cmndb5ltd0001uudqjrju1jly": {
+    "filename": "2026-03-30_Perenbladvlo_16.51.pdf",
+    "exportedAt": "2026-07-14T05:21:59.902Z",
+    "updatedAt": "2026-03-30T14:53:21.454Z",
+    "status": "afgerond",
+    "visitDate": "2026-03-30",
+    "company": "Fruitteeltbedrijf De Hoge Akker"
   }
 }
