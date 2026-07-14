@@ -5,6 +5,8 @@ import { PageHeader } from '@/components/layout/PageHeader'
 import { StatusBadge } from '@/components/ui/Badge'
 import { EmptyState } from '@/components/ui/EmptyState'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Actiepunten',
 }

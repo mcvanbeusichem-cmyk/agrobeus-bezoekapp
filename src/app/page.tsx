@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
 import { StatusBadge } from '@/components/ui/Badge'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Dashboard',
 }
