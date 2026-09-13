@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Agrovitae visitekaartje</title>
+<style>
+  /* ===================================================================
+     VISITEKAARTJE AGROVITAE
+     Trim 85 x 55 mm  |  Afloop 3 mm  |  Totaal 91 x 61 mm
+     Veilige zone: 5 mm binnen de snijlijn
+     =================================================================== */
+
+  :root {
+    --groen-diep:  #1f3d17;
+    --groen:       #3a6e2d;
+    --groen-fris:  #65a255;
+    --groen-licht: #d8edcf;
+    --zand:        #f7f5ef;
+    --inkt:        #16210f;
+    --grijs:       #6b7565;
+
+    --bleed: 3mm;
+    --trim-b: 85mm;
+    --trim-h: 55mm;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #d9ddd4;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--inkt);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .werkblad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14mm;
+    padding: 14mm 0;
+  }
+
+  .kaart {
+    position: relative;
+    width: calc(var(--trim-b) + 2 * var(--bleed));
+    height: calc(var(--trim-h) + 2 * var(--bleed));
+    overflow: hidden;
+    background: #fff;
+  }
+
+  /* Snijlijn-indicatie, alleen zichtbaar op het scherm */
+  .snijlijn {
+    position: absolute;
+    inset: var(--bleed);
+    border: 0.2mm dashed rgba(0,0,0,.28);
+    pointer-events: none;
+    z-index: 50;
+  }
+
+  .inhoud {
+    position: absolute;
+    inset: calc(var(--bleed) + 5mm);
+    z-index: 10;
+  }
+
+  /* ---------- VOORKANT ---------- */
+
+  .voor { background: var(--zand); }
+
+  .voor .veld {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(120% 90% at 12% 0%, #ffffff 0%, var(--zand) 62%);
+  }
+
+  .voor .boog {
+    position: absolute;
+    right: -26mm;
+    bottom: -30mm;
+    width: 74mm;
+    height: 74mm;
+    border-radius: 50%;
+    background: linear-gradient(150deg, var(--groen-fris), var(--groen) 72%);
+    opacity: .09;
+  }
+
+  .voor .balk {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4mm;
+    background: linear-gradient(180deg, var(--groen-fris), var(--groen-diep));
+  }
+
+  .merk {
+    display: flex;
+    align-items: center;
+    gap: 4mm;
+    height: 100%;
+  }
+
+  .merk svg { width: 16mm; height: 16mm; flex: none; }
+
+  .woordmerk .naam {
+    font-size: 8.2mm;
+    line-height: .92;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--groen-diep);
+  }
+
+  .woordmerk .naam span { font-weight: 300; color: var(--groen); }
+
+  .woordmerk .lijn {
+    width: 12mm;
+    height: 0.7mm;
+    background: var(--groen-fris);
+    margin: 2.2mm 0 1.8mm;
+  }
+
+  .woordmerk .payoff {
+    font-size: 2.5mm;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--grijs);
+  }
+
+  .voor .hoek {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    text-align: right;
+    font-size: 2.4mm;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--groen);
+  }
+
+  /* ---------- ACHTERKANT ---------- */
+
+  .achter { background: var(--groen-diep); color: #fff; }
+
+  .achter .veld {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(130% 110% at 85% 110%, #2c5520 0%, var(--groen-diep) 58%);
+  }
+
+  .achter .blad {
+    position: absolute;
+    right: -6mm;
+    top: -8mm;
+    width: 42mm;
+    opacity: .10;
+  }
+
+  .achter .inhoud {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .persoon .pnaam {
+    font-size: 5mm;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .persoon .rol {
+    margin-top: 1.2mm;
+    font-size: 2.6mm;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--groen-licht);
+  }
+
+  .streep {
+    width: 10mm;
+    height: 0.6mm;
+    background: var(--groen-fris);
+    margin: 2.6mm 0;
+  }
+
+  .gegevens {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5mm;
+  }
+
+  .regel {
+    display: flex;
+    align-items: center;
+    gap: 1.8mm;
+    font-size: 2.85mm;
+    line-height: 1.2;
+    white-space: nowrap;
+    color: #eef4ea;
+  }
+
+  .regel svg { width: 3.2mm; height: 3.2mm; flex: none; color: var(--groen-fris); }
+
+  .voet {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 2.2mm;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.45);
+  }
+
+  /* ---------- PRINT ---------- */
+
+  @page {
+    size: 91mm 61mm;
+    margin: 0;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .werkblad { gap: 0; padding: 0; }
+    .snijlijn, .schermtitel { display: none !important; }
+    .kaart {
+      break-after: page;
+      page-break-after: always;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+    .kaart:last-child { break-after: auto; page-break-after: auto; }
+  }
+
+  .schermtitel {
+    font-size: 3mm;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: #5d6857;
+  }
+</style>
+</head>
+<body>
+<div class="werkblad">
+
+  <div class="schermtitel">Voorkant &nbsp;&middot;&nbsp; 85 &times; 55 mm &nbsp;&middot;&nbsp; 3 mm afloop</div>
+
+  <!-- ============ VOORKANT ============ -->
+  <div class="kaart voor">
+    <div class="veld"></div>
+    <div class="boog"></div>
+    <div class="balk"></div>
+    <div class="inhoud">
+      <div class="merk">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M32 60C32 60 32 36 32 24" stroke="#3a6e2d" stroke-width="3.2" stroke-linecap="round"/>
+          <path d="M32 30C32 30 18 30 11 22C4 14 6 5 6 5C6 5 20 4 27 12C33 19 32 30 32 30Z" fill="#65a255"/>
+          <path d="M32 38C32 38 44 39 52 32C60 25 59 14 59 14C59 14 45 15 38 22C32 28 32 38 32 38Z" fill="#3a6e2d"/>
+          <circle cx="32" cy="24" r="3.4" fill="#1f3d17"/>
+        </svg>
+        <div class="woordmerk">
+          <div class="naam">AGRO<span>VITAE</span></div>
+          <div class="lijn"></div>
+          <div class="payoff" data-veld="payoff">Fruitteelt &amp; Gewasvitaliteit</div>
+        </div>
+      </div>
+      <div class="hoek" data-veld="web">www.agrovitae.nl</div>
+    </div>
+    <div class="snijlijn"></div>
+  </div>
+
+  <div class="schermtitel">Achterkant</div>
+
+  <!-- ============ ACHTERKANT ============ -->
+  <div class="kaart achter">
+    <div class="veld"></div>
+    <svg class="blad" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M32 62V22" stroke="#ffffff" stroke-width="3"/>
+      <path d="M32 30C32 30 18 30 11 22C4 14 6 5 6 5C6 5 20 4 27 12C33 19 32 30 32 30Z" fill="#ffffff"/>
+      <path d="M32 38C32 38 44 39 52 32C60 25 59 14 59 14C59 14 45 15 38 22C32 28 32 38 32 38Z" fill="#ffffff"/>
+    </svg>
+    <div class="inhoud">
+
+      <div class="persoon">
+        <div class="pnaam" data-veld="naam">Marco van Beusichem</div>
+        <div class="rol" data-veld="functie">Internationaal Fruitconsultant</div>
+        <div class="streep"></div>
+      </div>
+
+      <div class="gegevens">
+        <div class="regel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+          <span data-veld="telefoon">+31 6 54950432</span>
+        </div>
+        <div class="regel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+          <span data-veld="email">info@agrovitae.nl</span>
+        </div>
+        <div class="regel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span data-veld="adres">Hoofdstraat 49, 4041 AB Kesteren</span>
+        </div>
+        <div class="regel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z"/></svg>
+          <span data-veld="web2">www.agrovitae.nl</span>
+        </div>
+      </div>
+
+      <div class="voet">
+        <span data-veld="kvk">KVK 00000000</span>
+        <span data-veld="land">Nederland</span>
+      </div>
+
+    </div>
+    <div class="snijlijn"></div>
+  </div>
+
+</div>
+</body>
+</html>
