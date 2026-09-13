@@ -42,3 +42,9 @@ De QR staat als losse SVG in de pagina, dus er is geen internetverbinding of ext
 Gegevens gewijzigd? Pas ze aan in `maak-qr.py`, draai `python3 design/visitekaartje/maak-qr.py` (eenmalig `pip install qrcode`) en plak de nieuwe `qr-vcard.svg` in de pagina tussen `<div class="qr-doos">`. Wijzig daarna dezelfde gegevens in de HTML zelf.
 
 `marco-van-beusichem-agrovitae.vcf` is hetzelfde contact als los bestand, handig om als bijlage te mailen.
+
+## Deelbare QR voor social
+
+`deel-qr-post.png` (1080 x 1080, feed) en `deel-qr-story.png` (1080 x 1920, story) bevatten het logo met de QR erin.
+`qr-vcard.png` is de kale code op wit, om zelf ergens in te plakken.
+Bron is `deel-qr.html`; na een wijziging in `maak-qr.py` opnieuw renderen met hetzelfde puppeteer-script.
