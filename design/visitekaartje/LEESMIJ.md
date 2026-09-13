@@ -48,3 +48,8 @@ Gegevens gewijzigd? Pas ze aan in `maak-qr.py`, draai `python3 design/visitekaar
 `deel-qr-post.png` (1080 x 1080, feed) en `deel-qr-story.png` (1080 x 1920, story) bevatten het logo met de QR erin.
 `qr-vcard.png` is de kale code op wit, om zelf ergens in te plakken.
 Bron is `deel-qr.html`; na een wijziging in `maak-qr.py` opnieuw renderen met hetzelfde puppeteer-script.
+
+## Engels
+
+De digitale kaart staat in twee talen op één link. De knop rechtsboven wisselt tussen NL en EN, en de pagina kiest zelf Engels bij een niet-Nederlandse browsertaal. Vertalingen staan in de HTML als `data-en` naast de Nederlandse tekst.
+`deel-qr-post-en.png` en `deel-qr-story-en.png` zijn de Engelse social-beelden.
