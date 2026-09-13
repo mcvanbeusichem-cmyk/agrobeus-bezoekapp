@@ -17,6 +17,7 @@ VCARD = "\r\n".join([
     "TEL;TYPE=CELL:+31654950432",
     "EMAIL:info@agrovitae.eu",
     "URL:https://www.agrovitae.eu",
+    "ADR;TYPE=WORK:;;Hoofdstraat 49;Kesteren;;4041 AB;Nederland",
     "END:VCARD",
     "",
 ])
