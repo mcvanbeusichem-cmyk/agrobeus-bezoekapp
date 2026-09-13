@@ -30,3 +30,14 @@ De PDF is RGB. Vrijwel elke online drukker (Drukwerkdeal, Probo, Flyerzone) reke
 Wil je exacte kleur, laat de drukker dan omzetten naar Coated FOGRA39 of lever zelf een CMYK-PDF aan.
 Advies voor het gevoel in de hand: 400 grams, matte laminaat, enkelzijdig groen vlak op de achterkant.
 Vraag altijd een drukproef aan bij de eerste bestelling.
+
+---
+
+# Digitaal visitekaartje
+
+`digitaal-visitekaartje.html` is de deelbare webversie. Bellen, WhatsApp, mailen en route zijn tikbaar, de QR-code bevat de vCard.
+De QR staat als losse SVG in de pagina, dus er is geen internetverbinding of externe bibliotheek nodig om hem te tonen.
+
+Gegevens gewijzigd? Pas ze aan in `maak-qr.py`, draai `python3 design/visitekaartje/maak-qr.py` (eenmalig `pip install qrcode`) en plak de nieuwe `qr-vcard.svg` in de pagina tussen `<div class="qr-doos">`. Wijzig daarna dezelfde gegevens in de HTML zelf.
+
+`marco-van-beusichem-agrovitae.vcf` is hetzelfde contact als los bestand, handig om als bijlage te mailen.

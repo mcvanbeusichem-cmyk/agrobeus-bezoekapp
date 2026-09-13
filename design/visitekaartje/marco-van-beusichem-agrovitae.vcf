@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:van Beusichem;Marco;;;
+FN:Marco van Beusichem
+ORG:Agrovitae
+TITLE:Internationaal fruitconsultant
+TEL;TYPE=CELL:+31654950432
+EMAIL:info@agrovitae.nl
+URL:https://www.agrovitae.nl
+ADR;TYPE=WORK:;;Hoofdstraat 49;Kesteren;;4041 AB;Nederland
+END:VCARD
