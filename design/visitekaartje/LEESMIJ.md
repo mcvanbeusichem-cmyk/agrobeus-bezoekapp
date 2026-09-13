@@ -12,7 +12,7 @@ Kleuren komen uit het Agrovitae-logo: groen #405038, mos #56684a, olijf #8b8f4e,
 
 Open `agrovitae-visitekaartje.html` en zoek op `data-veld`. Elk veld staat er los in:
 naam, functie, telefoon, email, adres, web, kvk, payoff.
-De KVK-regel staat nog op `00000000`, vervang die voor je naar de drukker gaat.
+Het KVK-nummer op de achterkant is 88547392.
 Het logo staat als `agrovitae-logo.png` (volledig), `agrovitae-merk.png` (alleen het beeldmerk) en `agrovitae-logo-web.png` (kleiner, voor de webversie). Heb je het originele vectorbestand, gebruik dat dan voor drukwerk in plaats van de PNG.
 
 ## Opnieuw renderen
