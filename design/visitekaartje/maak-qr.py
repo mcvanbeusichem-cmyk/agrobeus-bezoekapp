@@ -13,10 +13,10 @@ VCARD = "\r\n".join([
     "N:van Beusichem;Marco;;;",
     "FN:Marco van Beusichem",
     "ORG:Agrovitae",
-    "TITLE:Internationaal fruitconsultant",
+    "TITLE:Eigenaar",
     "TEL;TYPE=CELL:+31654950432",
-    "EMAIL:info@agrovitae.nl",
-    "URL:https://www.agrovitae.nl",
+    "EMAIL:info@agrovitae.eu",
+    "URL:https://www.agrovitae.eu",
     "END:VCARD",
     "",
 ])

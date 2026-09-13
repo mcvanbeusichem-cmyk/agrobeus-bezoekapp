@@ -6,13 +6,14 @@ Drukklaar ontwerp, voor- en achterkant.
 
 Snijformaat 85 x 55 mm, afloop 3 mm rondom, totaal bestand 91 x 61 mm.
 Tekst en logo blijven 5 mm binnen de snijlijn, dus niets valt weg bij het snijden.
-Kleuren komen uit de Agrobeus-huisstijl: diepgroen #1f3d17, groen #3a6e2d, frisgroen #65a255, zand #f7f5ef.
+Kleuren komen uit het Agrovitae-logo: groen #405038, mos #56684a, olijf #8b8f4e, zand #f2f0e6.
 
 ## Gegevens aanpassen
 
 Open `agrovitae-visitekaartje.html` en zoek op `data-veld`. Elk veld staat er los in:
 naam, functie, telefoon, email, adres, web, kvk, payoff.
-De KVK-regel staat nu op `00000000` en het webadres op `www.agrovitae.nl`. Beide vervangen voor je naar de drukker gaat.
+De KVK-regel staat nog op `00000000`, vervang die voor je naar de drukker gaat.
+Het logo staat als `agrovitae-logo.png` (volledig), `agrovitae-merk.png` (alleen het beeldmerk) en `agrovitae-logo-web.png` (kleiner, voor de webversie). Heb je het originele vectorbestand, gebruik dat dan voor drukwerk in plaats van de PNG.
 
 ## Opnieuw renderen
 

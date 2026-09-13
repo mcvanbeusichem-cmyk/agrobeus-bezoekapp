@@ -8,16 +8,17 @@
      VISITEKAARTJE AGROVITAE
      Trim 85 x 55 mm  |  Afloop 3 mm  |  Totaal 91 x 61 mm
      Veilige zone: 5 mm binnen de snijlijn
+     Kleuren komen uit het logo: #405038 groen, #8b8f4e olijf
      =================================================================== */
 
   :root {
-    --groen-diep:  #1f3d17;
-    --groen:       #3a6e2d;
-    --groen-fris:  #65a255;
-    --groen-licht: #d8edcf;
-    --zand:        #f7f5ef;
-    --inkt:        #16210f;
-    --grijs:       #6b7565;
+    --groen-diep:  #2b3626;
+    --groen:       #405038;
+    --mos:         #56684a;
+    --olijf:       #8b8f4e;
+    --zand:        #f2f0e6;
+    --room:        #fbfaf4;
+    --grijs:       #6f7566;
 
     --bleed: 3mm;
     --trim-b: 85mm;
@@ -27,9 +28,9 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: #d9ddd4;
+    background: #d7d9d0;
     font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-    color: var(--inkt);
+    color: var(--groen-diep);
     -webkit-font-smoothing: antialiased;
   }
 
@@ -66,96 +67,61 @@
 
   /* ---------- VOORKANT ---------- */
 
-  .voor { background: var(--zand); }
+  .voor { background: var(--room); }
 
   .voor .veld {
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(120% 90% at 12% 0%, #ffffff 0%, var(--zand) 62%);
+    background: radial-gradient(115% 85% at 50% 8%, #ffffff 0%, var(--zand) 78%);
   }
 
-  .voor .boog {
-    position: absolute;
-    right: -26mm;
-    bottom: -30mm;
-    width: 74mm;
-    height: 74mm;
-    border-radius: 50%;
-    background: linear-gradient(150deg, var(--groen-fris), var(--groen) 72%);
-    opacity: .09;
-  }
-
-  .voor .balk {
+  .voor .zoom {
     position: absolute;
     left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4mm;
-    background: linear-gradient(180deg, var(--groen-fris), var(--groen-diep));
-  }
-
-  .merk {
-    display: flex;
-    align-items: center;
-    gap: 4mm;
-    height: 100%;
-  }
-
-  .merk svg { width: 16mm; height: 16mm; flex: none; }
-
-  .woordmerk .naam {
-    font-size: 8.2mm;
-    line-height: .92;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--groen-diep);
-  }
-
-  .woordmerk .naam span { font-weight: 300; color: var(--groen); }
-
-  .woordmerk .lijn {
-    width: 12mm;
-    height: 0.7mm;
-    background: var(--groen-fris);
-    margin: 2.2mm 0 1.8mm;
-  }
-
-  .woordmerk .payoff {
-    font-size: 2.5mm;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--grijs);
-  }
-
-  .voor .hoek {
-    position: absolute;
     right: 0;
     bottom: 0;
-    text-align: right;
-    font-size: 2.4mm;
-    letter-spacing: .14em;
+    height: 5mm;
+    background: linear-gradient(90deg, var(--groen) 0%, var(--mos) 58%, var(--olijf) 100%);
+  }
+
+  .voor .inhoud {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3.6mm;
+  }
+
+  .voor img {
+    width: 42mm;
+    height: auto;
+    display: block;
+  }
+
+  .domein {
+    font-size: 2.6mm;
+    letter-spacing: .22em;
     text-transform: uppercase;
-    color: var(--groen);
+    color: var(--mos);
   }
 
   /* ---------- ACHTERKANT ---------- */
 
-  .achter { background: var(--groen-diep); color: #fff; }
+  .achter { background: var(--groen-diep); color: var(--room); }
 
   .achter .veld {
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(130% 110% at 85% 110%, #2c5520 0%, var(--groen-diep) 58%);
+    background: radial-gradient(125% 105% at 88% 112%, #3b4a33 0%, var(--groen-diep) 60%);
   }
 
-  .achter .blad {
+  .achter .merk-watermerk {
     position: absolute;
-    right: -6mm;
-    top: -8mm;
-    width: 42mm;
-    opacity: .10;
+    right: -8mm;
+    top: -9mm;
+    width: 40mm;
+    opacity: .085;
+    filter: grayscale(1) brightness(3);
   }
 
   .achter .inhoud {
@@ -168,6 +134,7 @@
     font-size: 5mm;
     font-weight: 600;
     letter-spacing: -0.01em;
+    color: #fff;
   }
 
   .persoon .rol {
@@ -175,13 +142,13 @@
     font-size: 2.6mm;
     letter-spacing: .12em;
     text-transform: uppercase;
-    color: var(--groen-licht);
+    color: var(--olijf);
   }
 
   .streep {
     width: 10mm;
     height: 0.6mm;
-    background: var(--groen-fris);
+    background: var(--olijf);
     margin: 2.6mm 0;
   }
 
@@ -198,10 +165,10 @@
     font-size: 2.85mm;
     line-height: 1.2;
     white-space: nowrap;
-    color: #eef4ea;
+    color: #eceee4;
   }
 
-  .regel svg { width: 3.2mm; height: 3.2mm; flex: none; color: var(--groen-fris); }
+  .regel svg { width: 3.2mm; height: 3.2mm; flex: none; color: var(--olijf); }
 
   .voet {
     display: flex;
@@ -210,15 +177,12 @@
     font-size: 2.2mm;
     letter-spacing: .1em;
     text-transform: uppercase;
-    color: rgba(255,255,255,.45);
+    color: rgba(255,255,255,.42);
   }
 
   /* ---------- PRINT ---------- */
 
-  @page {
-    size: 91mm 61mm;
-    margin: 0;
-  }
+  @page { size: 91mm 61mm; margin: 0; }
 
   @media print {
     body { background: #fff; }
@@ -249,23 +213,10 @@
   <!-- ============ VOORKANT ============ -->
   <div class="kaart voor">
     <div class="veld"></div>
-    <div class="boog"></div>
-    <div class="balk"></div>
+    <div class="zoom"></div>
     <div class="inhoud">
-      <div class="merk">
-        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M32 60C32 60 32 36 32 24" stroke="#3a6e2d" stroke-width="3.2" stroke-linecap="round"/>
-          <path d="M32 30C32 30 18 30 11 22C4 14 6 5 6 5C6 5 20 4 27 12C33 19 32 30 32 30Z" fill="#65a255"/>
-          <path d="M32 38C32 38 44 39 52 32C60 25 59 14 59 14C59 14 45 15 38 22C32 28 32 38 32 38Z" fill="#3a6e2d"/>
-          <circle cx="32" cy="24" r="3.4" fill="#1f3d17"/>
-        </svg>
-        <div class="woordmerk">
-          <div class="naam">AGRO<span>VITAE</span></div>
-          <div class="lijn"></div>
-          <div class="payoff" data-veld="payoff">Fruitteelt &amp; Gewasvitaliteit</div>
-        </div>
-      </div>
-      <div class="hoek" data-veld="web">www.agrovitae.nl</div>
+      <img src="agrovitae-logo.png" alt="Agrovitae, bladmeststoffen en biostimulanten">
+      <div class="domein" data-veld="web">www.agrovitae.eu</div>
     </div>
     <div class="snijlijn"></div>
   </div>
@@ -275,16 +226,12 @@
   <!-- ============ ACHTERKANT ============ -->
   <div class="kaart achter">
     <div class="veld"></div>
-    <svg class="blad" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M32 62V22" stroke="#ffffff" stroke-width="3"/>
-      <path d="M32 30C32 30 18 30 11 22C4 14 6 5 6 5C6 5 20 4 27 12C33 19 32 30 32 30Z" fill="#ffffff"/>
-      <path d="M32 38C32 38 44 39 52 32C60 25 59 14 59 14C59 14 45 15 38 22C32 28 32 38 32 38Z" fill="#ffffff"/>
-    </svg>
+    <img class="merk-watermerk" src="agrovitae-merk.png" alt="">
     <div class="inhoud">
 
       <div class="persoon">
         <div class="pnaam" data-veld="naam">Marco van Beusichem</div>
-        <div class="rol" data-veld="functie">Internationaal Fruitconsultant</div>
+        <div class="rol" data-veld="functie">Bladmeststoffen &amp; biostimulanten</div>
         <div class="streep"></div>
       </div>
 
@@ -295,7 +242,7 @@
         </div>
         <div class="regel">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
-          <span data-veld="email">info@agrovitae.nl</span>
+          <span data-veld="email">info@agrovitae.eu</span>
         </div>
         <div class="regel">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -303,7 +250,7 @@
         </div>
         <div class="regel">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z"/></svg>
-          <span data-veld="web2">www.agrovitae.nl</span>
+          <span data-veld="web2">www.agrovitae.eu</span>
         </div>
       </div>
 
